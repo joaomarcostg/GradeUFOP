@@ -38,7 +38,6 @@ const carregar_grafo = (disciplinas) => {
     let capacidade = 0
     let vertices_count = disciplinas.length + 2 //somo 2 devido aos vertices S e T
     const turmas_disc = [], codigos_disc = []
-    const cores = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
 
     //para cada disciplina eu somo as horas acumuladas, para ter a capacidade de fluxo
     disciplinas.forEach((disc) => {
@@ -64,7 +63,7 @@ const carregar_grafo = (disciplinas) => {
         disc.turmas.forEach((turma, j) => {
 
             //faço uma relacao dos numeros das turmas e seus respectivos vertives na matriz
-            turmas_disc.push([(j + 1) + k + disciplinas.length, turma])
+            turmas_disc.push([(j + 1) + k + disciplinas.length, turma.numero])
 
             //acho a cor que devo pintar a aresta
             const cores = calcula_cor(turma.horario)
@@ -148,7 +147,44 @@ const disciplinas = [
 ]
 
 const resolver = (grafo) => {
+    let i,j
+    const cores_disponiveis = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+    let fluxo, cor1, cor2, ind1, ind2
+    const grafo_c = JSON.parse(JSON.stringify(grafo))
 
+    let capacidade = grafo_c[0][0]
+
+    i=0
+    while(i < grafo_c.length){
+        while(j < grafo_c[i].length){
+            if(i != j){
+                if(grafo_c[i][j] != 0){
+                    
+                    //marco a aresta de disciplina como visitada
+                    grafo_c[i][j] -= grafo_c[i][j]
+
+                    //pego as cores da aresta para ver se ela pode ser escolhida
+                    cor1 = grafo_c[i][j][1][0]
+                    cor2 = grafo_c[i][j][1][1]
+                    ind1 = cores_disponiveis.indexOf(cor1)
+                    ind2 = cores_disponiveis.indexOf(cor2)
+                    
+                    //se as cores estiverem disponiveis elas agora sao removidas
+                    if((ind1 != -1) && (ind2 != -1)){
+                        cores_disponiveis.splice(ind1)
+                    }
+                    
+
+                    //retiro o fluxo da aresta
+                    fluxo = grafo_c[i][j][0]
+                    capacidade = capacidade - fluxo
+
+
+                }
+            }
+        } 
+        i++
+    }
 }
 
 carregar_grafo(disciplinas)
