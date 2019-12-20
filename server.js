@@ -86,6 +86,7 @@ const carregar_grafo = (disciplinas) => {
     })
 
     console.table(grafo)
+    return grafo
 }
 
 const disciplinas = [
@@ -138,53 +139,94 @@ const disciplinas = [
     },
     {
         'codigo': 'CEA502',
-        'horas': 1,
+        'horas': 2,
         'turmas': [{
             'numero': 31,
-            'horario': [[2, 2]]
+            'horario': [[2, 2], [4,1]]
         }]
     }
 ]
 
-const resolver = (grafo) => {
-    let i,j
-    const cores_disponiveis = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
-    let fluxo, cor1, cor2, ind1, ind2
-    const grafo_c = JSON.parse(JSON.stringify(grafo))
+const resolver = (grafo, min, j, combinacoes, cores_usadas, fluxo,a) => {
+    
+    if(j < (grafo[0].length - 1)){
 
-    let capacidade = grafo_c[0][0]
+        
+        const i = 0
+        const cores_usadas_c = JSON.parse(JSON.stringify(cores_usadas))
+        
+        const grafo_c = JSON.parse(JSON.stringify(grafo))
+        
+        if (grafo_c[i][j] != 0) {
+            
+            //marco a aresta de disciplina como visitada
+            grafo_c[i][j] -= grafo_c[i][j]
+            
+            //digo que nessa aresta passou o fluxo, e a capacidade diminui
+            fluxo += grafo_c[i][j]
+            grafo_c[0][0] -= fluxo
 
-    i=0
-    while(i < grafo_c.length){
-        while(j < grafo_c[i].length){
-            if(i != j){
-                if(grafo_c[i][j] != 0){
-                    
-                    //marco a aresta de disciplina como visitada
-                    grafo_c[i][j] -= grafo_c[i][j]
+            //dado a disciplina escolhida 'j' escolho a turma em questao
+            // console.log(cores_usadas_c)
+            const resp = escolher_turma(grafo_c, j, cores_usadas_c)
 
-                    //pego as cores da aresta para ver se ela pode ser escolhida
-                    cor1 = grafo_c[i][j][1][0]
-                    cor2 = grafo_c[i][j][1][1]
-                    ind1 = cores_disponiveis.indexOf(cor1)
-                    ind2 = cores_disponiveis.indexOf(cor2)
-                    
-                    //se as cores estiverem disponiveis elas agora sao removidas
-                    if((ind1 != -1) && (ind2 != -1)){
-                        cores_disponiveis.splice(ind1)
+            if (resp.length > 0) {
+
+                resp.forEach( e => {
+                    // console.log(e)
+                    const combinacoes_c = JSON.parse(JSON.stringify(combinacoes))
+                    combinacoes_c.push(e)
+                    if(j == 5){
+                        console.log(combinacoes_c)
+                        a.push(combinacoes_c)
                     }
-                    
-
-                    //retiro o fluxo da aresta
-                    fluxo = grafo_c[i][j][0]
-                    capacidade = capacidade - fluxo
-
-
-                }
+                    resolver(grafo_c, min, j+1, combinacoes_c, cores_usadas_c, fluxo,a)
+                })
             }
-        } 
-        i++
+        }
+    }
+    else{
+        return combinacoes
     }
 }
 
-carregar_grafo(disciplinas)
+const escolher_turma = (grafo, linha, cores_usadas) => {
+    
+    const resp = []
+    let j = linha + 1
+    
+    while (j < grafo[linha].length) {
+        
+        if (j != linha && grafo[linha][j] != 0) {
+            // console.log(j)
+            //marco a aresta de disciplina como visitada
+            grafo[linha][j][0] -= grafo[linha][j][0]
+            
+            
+            //pego as cores da aresta para ver se ela pode ser escolhida
+            cor1 = grafo[linha][j][1][0]
+            cor2 = grafo[linha][j][1][1]
+            ind1 = cores_usadas.indexOf(cor1)
+            ind2 = cores_usadas.indexOf(cor2)
+
+            //se as cores estiverem disponiveis elas agora sao removidas
+            if ((ind1 == -1) && (ind2 == -1)) {
+                cores_usadas.push(ind1)
+                cores_usadas.push(ind2)
+                resp.push([linha, j])
+            }
+        }
+        j++
+    }
+    resp.push([null])
+    return resp
+}
+
+
+const combinacoes = [], cores_usadas = []
+let fluxo = 0
+const grafo = carregar_grafo(disciplinas)
+const a = []
+const b = resolver(grafo, 4, 1, combinacoes, cores_usadas, fluxo, a)
+
+console.log(a)
