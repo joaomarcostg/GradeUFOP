@@ -1,4 +1,4 @@
-const calcula_cor = (horario) => {
+function calcula_cor(horario) {
 
     if (horario.length == 2) {
         cor1 = 5 * horario[0][0] + horario[0][1]
@@ -11,7 +11,8 @@ const calcula_cor = (horario) => {
     }
 }
 
-const grafo_vazio = (tamanho) => {
+
+function grafo_vazio(tamanho) {
     let i = 0, j = 0
     const grafo = []
 
@@ -31,7 +32,8 @@ const grafo_vazio = (tamanho) => {
     return grafo
 }
 
-const carregar_grafo = (disciplinas) => {
+
+function carregar_grafo(disciplinas) {
 
     let capacidade = 0
     let vertices_count = disciplinas.length + 2 //somo 2 devido aos vertices S e T
@@ -94,65 +96,8 @@ const carregar_grafo = (disciplinas) => {
     return grafo
 }
 
-const disciplinas = [
-    {
-        'codigo': 'CSI488',
-        'horas': 2,
-        'turmas': [{
-            'numero': 31,
-            'horario': [[0, 1], [2, 0]]
-        }, {
-            'numero': 32,
-            'horario': [[1, 0], [3, 0]]
-        }, {
-            'numero': 33,
-            'horario': [[0, 0], [3, 1]]
-        }]
-    },
-    {
-        'codigo': 'CSI745',
-        'horas': 2,
-        'turmas': [{
-            'numero': 31,
-            'horario': [[2, 3], [4, 4]]
-        }, {
-            'numero': 32,
-            'horario': [[1, 3], [3, 2]]
-        }, {
-            'numero': 33,
-            'horario': [[0, 1], [2, 1]]
-        }]
-    },
-    {
-        'codigo': 'CEA302',
-        'horas': 2,
-        'turmas': [{
-            'numero': 31,
-            'horario': [[0, 1], [3, 0]]
-        }, {
-            'numero': 32,
-            'horario': [[1, 2], [4, 3]]
-        }]
-    },
-    {
-        'codigo': 'CSI400',
-        'horas': 2,
-        'turmas': [{
-            'numero': 31,
-            'horario': [[1, 1], [4, 0]]
-        }]
-    },
-    {
-        'codigo': 'CEA502',
-        'horas': 2,
-        'turmas': [{
-            'numero': 31,
-            'horario': [[2, 2], [4, 1]]
-        }]
-    }
-]
 
-const escolher_turma = (grafo, linha, cores_usadas) => {
+function escolher_turma(grafo, linha, cores_usadas) {
 
     const resp = []
     let j = linha + 1
@@ -184,7 +129,8 @@ const escolher_turma = (grafo, linha, cores_usadas) => {
     return resp
 }
 
-const resolver = (grafo, min, j, size, combinacoes, cores_usadas, fluxo, possibilidades) => {
+
+function resolver(grafo, min, j, size, combinacoes, cores_usadas, fluxo, possibilidades) {
 
     //uso o passo recursivo para evitar que ele alcance o 'j' respectivo à linha 'T'
     if (j < size) {
@@ -251,11 +197,10 @@ const resolver = (grafo, min, j, size, combinacoes, cores_usadas, fluxo, possibi
     }
 }
 
-
 //converto a resposta para algo mais legivel
-const converter = (array, grafo) => {
+function converter(combinacoes, grafo) {
 
-    array.forEach(comb => {
+    combinacoes.forEach(comb => {
         for (let i = 0; i < comb.length; i++) {
             const disc = comb[i]
             if (disc != '') {
@@ -267,12 +212,72 @@ const converter = (array, grafo) => {
     })
 }
 
-const combinacoes = [], cores_usadas = []
-let fluxo = 0
-const grafo = carregar_grafo(disciplinas)
-const possibilidades = []
 
-resolver(grafo, 4, 1, disciplinas.length + 1, combinacoes, cores_usadas, fluxo, possibilidades)
-converter(possibilidades, grafo)
+// const disciplinas = [
+//     {
+//         'codigo': 'CSI488',
+//         'horas': 2,
+//         'turmas': [{
+//             'numero': 31,
+//             'horario': [[0, 1], [2, 0]]
+//         }, {
+//             'numero': 32,
+//             'horario': [[1, 0], [3, 0]]
+//         }, {
+//             'numero': 33,
+//             'horario': [[0, 0], [3, 1]]
+//         }]
+//     },
+//     {
+//         'codigo': 'CSI745',
+//         'horas': 2,
+//         'turmas': [{
+//             'numero': 31,
+//             'horario': [[2, 3], [4, 4]]
+//         }, {
+//             'numero': 32,
+//             'horario': [[1, 3], [3, 2]]
+//         }, {
+//             'numero': 33,
+//             'horario': [[0, 1], [2, 1]]
+//         }]
+//     },
+//     {
+//         'codigo': 'CEA302',
+//         'horas': 2,
+//         'turmas': [{
+//             'numero': 31,
+//             'horario': [[0, 1], [3, 0]]
+//         }, {
+//             'numero': 32,
+//             'horario': [[1, 2], [4, 3]]
+//         }]
+//     },
+//     {
+//         'codigo': 'CSI400',
+//         'horas': 2,
+//         'turmas': [{
+//             'numero': 31,
+//             'horario': [[1, 1], [4, 0]]
+//         }]
+//     },
+//     {
+//         'codigo': 'CEA502',
+//         'horas': 2,
+//         'turmas': [{
+//             'numero': 31,
+//             'horario': [[2, 2], [4, 1]]
+//         }]
+//     }
+// ]
 
-console.log(possibilidades)
+
+// const combinacoes = [], cores_usadas = []
+// let fluxo = 0
+// const grafo = carregar_grafo(disciplinas)
+// const possibilidades = []
+
+// resolver(grafo, 4, 1, disciplinas.length + 1, combinacoes, cores_usadas, fluxo, possibilidades)
+// converter(possibilidades, grafo)
+
+// console.log(possibilidades)
