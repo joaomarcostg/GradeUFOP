@@ -1,0 +1,54 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway&display=swap");
+
+.mc-picker {
+  padding: 30px 20px 20px 20px;
+}
+
+.col {
+  float: left;
+  font-family: "Raleway", sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 0px 10px 0px 10px;
+}
+
+.sel{
+    width: 100%;
+}
+
+.departamentos {
+//   background-color: orange;
+  width: 16%;
+
+}
+
+.disciplinas {
+//   background-color: red;
+  width: 48%;
+
+}
+
+.turmas {
+//   background-color: green;
+  width: 30%;
+
+}
+
+.btn {
+    
+    width: 4%;
+    padding-top: 15px;
+    
+}
+
+.mc-picker :after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media screen and (max-width: 900px) {
+  .col {
+    width: 100%;
+  }
+}

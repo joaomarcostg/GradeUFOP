@@ -1,13 +1,15 @@
 import React from 'react';
-import logo from './logo.svg';
+import Header from './components/header'
+import Picker from './components/picker'
+// import Schedule from './components/schedule'
+
 import './App.css';
 
 function App() {
   return (
     <div className="main-container">
-      <div className="header">
-        
-      </div>
+      <Header />
+      <Picker />
       <div className="content">
         
       </div>
