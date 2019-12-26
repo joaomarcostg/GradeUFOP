@@ -23,15 +23,23 @@ function Picker(props) {
             <div className="select-container">
                 <div className='col departamentos'>
                     <p>Departamento</p>
-                    <select className='sel' name="depto" id="get_depto"></select>
+                    <select className='sel' name="depto" id="get_depto">
+                        <option value="opt1">DECEA</option>
+                        <option value="opt1">DECSI</option>
+                    </select>
                 </div>
                 <div className='col disciplinas'>
                     <p>Disciplina</p>
-                    <select className='sel' name="disc" id="get_disc"></select>
+                    <select className='sel' name="disc" id="get_disc">
+                        <option value="opt1">CSI-502 Eletromagnetismo</option>
+                        <option value="opt2">CSI-502 aslkdjasdlkasjdklasjdklasjdlkaslkdjaskldjalksjdklasjdlkasjdklasjdklasjdkajslkdjaskldjaslkdjlasdjasdasjdlaksjdlak</option>
+                    </select>
                 </div>
                 <div className='col turmas'>
                     <p>Turma</p>
-                    <select className='sel' name="turma" id="get_turma"></select>
+                    <select className='sel' name="turma" id="get_turma">
+                        <option value="opt1">T33 - Felipe Cota</option>
+                    </select>
                 </div>
                 <div className="col btn">
                     <IconButton aria-label="add">

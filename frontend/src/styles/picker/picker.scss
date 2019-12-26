@@ -1,44 +1,74 @@
+$ufop_red: #962a38;
+$ufop_grey: #707A81;
+
 @import url("https://fonts.googleapis.com/css?family=Raleway&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
 
 .mc-picker {
-  padding: 30px 20px 20px 20px;
+  margin: 30px 30px;
+  padding: 20px 20px 20px 20px;
+  background-color: #EEE;
+  border-radius: 12px;
+  box-shadow: -12px -12px 12px rgba($color: #FFF, $alpha: 1.0),
+               12px 12px 12px rgba($color: #000, $alpha: .08);
 }
 
 .col {
+  overflow: hidden;
+  text-align: center;
   float: left;
-  font-family: "Raleway", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: bold;
   font-size: 20px;
   padding: 0px 10px 0px 10px;
 }
 
-.sel{
-    width: 100%;
+
+.sel {
+
+  margin-top: 10px;
+  padding: 4px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  background: rgba($color: $ufop_red, $alpha: 0.9);
+  text-align-last: center;
+  width: 100%;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+
+  &:hover{
+    background: $ufop_grey;
+  }
+
 }
 
 .departamentos {
-//   background-color: orange;
+  //   background-color: orange;
+  overflow: visible;
   width: 16%;
-
 }
 
 .disciplinas {
-//   background-color: red;
+  //   background-color: red;
+  overflow: visible;
   width: 48%;
-
 }
 
 .turmas {
-//   background-color: green;
+  //   background-color: green;
+  overflow: visible;
   width: 30%;
-
 }
 
 .btn {
-    
-    width: 4%;
-    padding-top: 15px;
-    
+  width: 6%;
+  overflow: visible;
+  margin-top: 24px;
+  box-sizing: border-box;
+  padding: 0 10px;
+  text-align: center;
+  // background-color: rgb(44, 44, 250);
 }
 
 .mc-picker :after {
@@ -48,7 +78,25 @@
 }
 
 @media screen and (max-width: 900px) {
+  
   .col {
+    position: relative;
     width: 100%;
+    text-align: center;
+    padding: 15px 15px;
+
+    .sel {
+
+      margin-top: 10px;
+      padding: 10px;
+      font-family: "Montserrat", sans-serif;
+      font-weight: bold;
+      background-color: rgba($color: $ufop_red, $alpha: 0.9);
+      width: 70vw;
+      color: white;
+      text-align-last: center;
+      font-size: 16px;
+      
+    }
   }
 }
