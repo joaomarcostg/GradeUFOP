@@ -9,12 +9,13 @@
           box-shadow: -12px -12px 12px white, 12px 12px 12px rgba(0, 0, 0, 0.08);
 }
 
-.select-container {
-  height: 100%;
-  width: 100%;
+.mc-picker *::after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
-.col {
+.mc-picker .col {
   overflow: hidden;
   text-align: center;
   float: left;
@@ -24,7 +25,7 @@
   padding: 0px 10px 0px 10px;
 }
 
-.sel {
+.mc-picker .sel {
   margin-top: 10px;
   padding: 4px;
   font-family: "Montserrat", sans-serif;
@@ -37,48 +38,47 @@
   cursor: pointer;
 }
 
-.sel select {
+.mc-picker .sel select {
   width: inherit;
   font-size: inherit;
   font-size-adjust: inherit;
 }
 
-.sel select option {
+.mc-picker .sel select option {
   width: inherit;
 }
 
-.sel:hover {
+.mc-picker .sel:hover {
   background: #707a81;
 }
 
-.departamentos {
+.mc-picker .departamentos {
   overflow: visible;
   width: 16%;
 }
 
-.disciplinas {
+.mc-picker .disciplinas {
   overflow: visible;
   width: 48%;
   height: inherit;
 }
 
-.turmas {
+.mc-picker .turmas {
   overflow: visible;
   width: 30%;
   height: inherit;
 }
 
-.btn {
+.mc-picker .btn {
   overflow: visible;
   width: 6%;
   height: inherit;
   margin-top: 0px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  background: #eee;
 }
 
-.btn button {
+.mc-picker .btn button {
   margin-top: 36px;
   overflow: visible;
   height: 24px;
@@ -88,52 +88,110 @@
   cursor: pointer;
 }
 
-.btn button:hover {
+.mc-picker .btn button:hover {
   -webkit-transform: translateY(-5px);
           transform: translateY(-5px);
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
 }
 
-.btn button:active {
+.mc-picker .btn button:active {
   -webkit-transform: translateY(5px);
           transform: translateY(5px);
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
 }
 
-.mc-picker :after {
+.mc-picked {
+  margin: 30px 30px;
+  padding: 20px 20px 20px 20px;
+  background-color: #eee;
+  border-radius: 12px;
+  -webkit-box-shadow: -12px -12px 12px white, 12px 12px 12px rgba(0, 0, 0, 0.08);
+          box-shadow: -12px -12px 12px white, 12px 12px 12px rgba(0, 0, 0, 0.08);
+}
+
+.mc-picked *::after {
   content: "";
   display: table;
   clear: both;
 }
 
+.mc-picked .choosed {
+  padding: 10px 0px;
+}
+
+.mc-picked .choosed .c_col {
+  float: left;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  text-align: center;
+}
+
+.mc-picked .choosed .c_disc {
+  border-right: 1px solid black;
+  padding: 4px;
+  width: 64%;
+}
+
+.mc-picked .choosed .c_turma {
+  border-right: 1px solid black;
+  padding: 4px;
+  width: 30%;
+}
+
+.mc-picked .choosed .c_btn {
+  overflow: visible;
+  width: 6%;
+  height: inherit;
+  margin-top: 0px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.mc-picked .choosed .c_btn button {
+  overflow: visible;
+  height: 24px;
+  width: 24px;
+  background: #eee;
+  border: 0;
+  cursor: pointer;
+}
+
+.mc-picked .choosed .c_btn button:hover {
+  -webkit-transform: translateY(-5px);
+          transform: translateY(-5px);
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.mc-picked .choosed .c_btn button:active {
+  -webkit-transform: translateY(5px);
+          transform: translateY(5px);
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
 @media screen and (max-width: 900px) {
-  .col {
-    font-size: 16px;
-    position: relative;
-    width: 100%;
+  .mc-picker .col {
     text-align: center;
-    padding: 15px 15px;
+    font-size: 16px;
+    width: 100%;
+    padding: 15px;
   }
-  .col .sel {
+  .mc-picker .col .sel {
     margin-top: 10px;
-    padding: 10px;
-    font-family: "Montserrat", sans-serif;
-    font-weight: bold;
+    padding: 4px 0px;
     background-color: rgba(150, 42, 56, 0.9);
-    width: 70vw;
+    width: 100%;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
     color: white;
-    text-align-last: center;
-    font-size: inherit;
   }
-  .col .sel select {
-    width: 70vw;
+  .mc-picker .col .sel option {
+    width: 100%;
   }
-  .col .sel select option {
-    width: 70vw;
-  }
-  .btn {
+  .mc-picker .btn {
     display: inline-block;
     margin-top: 10px;
     overflow: visible;
@@ -142,24 +200,65 @@
     padding: 5px 10px;
     background: #eee;
   }
-  .btn button {
-    background: #eee;
+  .mc-picker .btn button {
     width: -webkit-fit-content;
     width: -moz-fit-content;
     width: fit-content;
     margin: 0;
-    height: 26px;
+    height: 24px;
     border: 0;
     cursor: pointer;
   }
-  .btn button:hover {
+  .mc-picker .btn button:hover {
     overflow: visible;
     -webkit-transform: translateY(-5px);
             transform: translateY(-5px);
     -webkit-transition: all 0.2s;
     transition: all 0.2s;
   }
-  .btn button:active {
+  .mc-picker .btn button:active {
+    -webkit-transform: translateY(5px);
+            transform: translateY(5px);
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+  }
+  .mc-picked .choosed {
+    position: relative;
+    margin-top: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    color: black;
+    border: 1px solid #707a81;
+    border-radius: 16px;
+  }
+  .mc-picked .choosed .c_col {
+    border-right: 0;
+    font-size: 16px;
+    position: relative;
+    width: 100%;
+    text-align: center;
+    padding: 15px 15px;
+  }
+  .mc-picked .choosed .c_disc {
+    border-bottom: 1px solid #707a81;
+  }
+  .mc-picked .choosed .c_btn {
+    text-align: right;
+    position: absolute;
+    top: -26px;
+    right: -26px;
+    overflow: visible;
+  }
+  .mc-picked .choosed .c_btn button {
+    background: white;
+    border-radius: 16px;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin: 0;
+    height: 24px;
+    cursor: pointer;
+  }
+  .mc-picked .choosed .c_btn button:active {
     -webkit-transform: translateY(5px);
             transform: translateY(5px);
     -webkit-transition: all 0.2s;

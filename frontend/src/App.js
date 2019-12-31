@@ -12,7 +12,7 @@ function App() {
       <Header />
       <Picker />
       <div className="content">
-        <Schedule />
+        {/* <Schedule /> */}
       </div>
     </div>    
   );
