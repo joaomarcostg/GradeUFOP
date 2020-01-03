@@ -1,11 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
-// import IconButton from '@material-ui/core/IconButton';
-// import AddCircleIcon from '@material-ui/icons/AddCircle';
-// import { makeStyles } from '@material-ui/core/styles';
+
 import '../styles/picker/picker.css'
-import add_icon from '../icons/add_btn.svg'
-import rmv_icon from '../icons/rmv_btn.svg'
+import add_icon from '../assets/add_btn.svg'
+import rmv_icon from '../assets/rmv_btn.svg'
 
 
 function Picker(props) {
@@ -53,33 +51,48 @@ function Picker(props) {
     }
 
 
+    
+    // window.onload = () => {
+    //     setInterval(() => {
+    //         var x = document.getElementById('get_depto')
+    //         let value = x.options[x.selectedIndex].text
+    //         console.log(value)
+    //     }, 1000)
+    // }
 
-    window.onload = function () {
+    // window.onload = function () {
 
-        const options = []
-        const elements = document.querySelectorAll('.short');
-        if (elements && elements.length) {
-            for (const element of elements) {
-                let text = element.innerText;
-                // let id = element.value;
-                options.push(text)
-            }
-        }
-        const wd = this.window.innerWidth
-        const hd = this.window.innerHeight
-        if (hd < 900 && wd < 450) {
-            shortString('.short', wd, options)
-        }
-        else {
+    //     const options = []
+    //     const elements = document.querySelectorAll('.short');
+    //     if (elements && elements.length) {
+    //         for (const element of elements) {
+    //             let text = element.innerText;
+    //             // let id = element.value;
+    //             options.push(text)
+    //         }
+    //     }
+    //     const wd = this.window.innerWidth
+    //     const hd = this.window.innerHeight
+    //     if (hd < 900 && wd < 450) {
+    //         shortString('.short', wd, options)
+    //     }
+    //     else {
 
 
-            setInterval(() => {
-                var width = this.window.innerWidth
-                shortString('.short', width, options)
-                // console.log(width)
-            }, 1000);
-        }
-    };
+    //         setInterval(() => {
+    //             var width = this.window.innerWidth
+    //             shortString('.short', width, options)
+    //             // console.log(width)
+    //         }, 100);
+    //     }
+    // };
+
+    function pick(){
+        const a = document.getElementById('get_depto')
+        const b = a.options[a.selectedIndex].text
+        console.log(b)
+    }
+
 
 
     const [disciplinas, setDisciplinas] = useState('');
@@ -90,7 +103,7 @@ function Picker(props) {
                 <div className="select-container">
                     <div className='col departamentos'>
                         <label htmlFor="get_depto">Departamento</label>
-                        <select className='sel' name="depto" id="get_depto">
+                        <select className='sel' name="depto" id="get_depto"  onChange={pick}>
                             <option value="opt1" className='short'>DECEA</option>
                             <option value="opt2" className='short'>DECSI</option>
                         </select>
@@ -105,11 +118,11 @@ function Picker(props) {
                     </div>
                     <div className='col turmas'>
                         <label htmlFor="get_turma">Turma</label>
-                        <select className='sel' name="turma" id="get_turma">
+                        <select className='sel' name="turma" id="get_turma" >
                             <option value="opt1" className='short'>T33 - Felipe Cota</option>
                             <option value="opt2" className='short'>T31 - Bruno Hott</option>
                         </select>
-                    </div>  
+                    </div>
                     <div className="col btn">
                         <button type="button">
                             <img src={add_icon} alt="Add" />
@@ -137,7 +150,6 @@ function Picker(props) {
                             </button>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
