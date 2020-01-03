@@ -117,30 +117,40 @@
   clear: both;
 }
 
-.mc-picked .choosed {
+.mc-picked .choosed-container p {
+  padding: 10px;
+  font-family: "Montserrat", sans-serif;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  border-bottom: 1px solid black;
+}
+
+.mc-picked .choosed-container .choosed {
   padding: 10px 0px;
 }
 
-.mc-picked .choosed .c_col {
+.mc-picked .choosed-container .choosed .c_col {
   float: left;
   font-family: "Montserrat", sans-serif;
   font-weight: bold;
   text-align: center;
 }
 
-.mc-picked .choosed .c_disc {
+.mc-picked .choosed-container .choosed .c_disc {
   border-right: 1px solid black;
   padding: 4px;
   width: 64%;
 }
 
-.mc-picked .choosed .c_turma {
+.mc-picked .choosed-container .choosed .c_turma {
   border-right: 1px solid black;
   padding: 4px;
   width: 30%;
 }
 
-.mc-picked .choosed .c_btn {
+.mc-picked .choosed-container .choosed .c_btn {
   overflow: visible;
   width: 6%;
   height: inherit;
@@ -149,7 +159,7 @@
           box-sizing: border-box;
 }
 
-.mc-picked .choosed .c_btn button {
+.mc-picked .choosed-container .choosed .c_btn button {
   overflow: visible;
   height: 24px;
   width: 24px;
@@ -158,14 +168,14 @@
   cursor: pointer;
 }
 
-.mc-picked .choosed .c_btn button:hover {
+.mc-picked .choosed-container .choosed .c_btn button:hover {
   -webkit-transform: translateY(-5px);
           transform: translateY(-5px);
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
 }
 
-.mc-picked .choosed .c_btn button:active {
+.mc-picked .choosed-container .choosed .c_btn button:active {
   -webkit-transform: translateY(5px);
           transform: translateY(5px);
   -webkit-transition: all 0.2s;
@@ -180,8 +190,9 @@
     padding: 15px;
   }
   .mc-picker .col .sel {
+    border-radius: 16px;
     margin-top: 10px;
-    padding: 4px 0px;
+    padding: 5px 10px;
     background-color: rgba(150, 42, 56, 0.9);
     width: 100%;
     font-family: "Montserrat", sans-serif;
@@ -222,7 +233,7 @@
     -webkit-transition: all 0.2s;
     transition: all 0.2s;
   }
-  .mc-picked .choosed {
+  .mc-picked .choosed-container .choosed {
     position: relative;
     margin-top: 10px;
     background: rgba(255, 255, 255, 0.9);
@@ -230,25 +241,25 @@
     border: 1px solid #707a81;
     border-radius: 16px;
   }
-  .mc-picked .choosed .c_col {
-    border-right: 0;
+  .mc-picked .choosed-container .choosed .c_col {
+    border: 0;
     font-size: 16px;
     position: relative;
     width: 100%;
     text-align: center;
     padding: 15px 15px;
   }
-  .mc-picked .choosed .c_disc {
+  .mc-picked .choosed-container .choosed .c_disc {
     border-bottom: 1px solid #707a81;
   }
-  .mc-picked .choosed .c_btn {
+  .mc-picked .choosed-container .choosed .c_btn {
     text-align: right;
     position: absolute;
-    top: -26px;
-    right: -26px;
+    top: -24px;
+    right: -24px;
     overflow: visible;
   }
-  .mc-picked .choosed .c_btn button {
+  .mc-picked .choosed-container .choosed .c_btn button {
     background: white;
     border-radius: 16px;
     width: -webkit-fit-content;
@@ -258,7 +269,7 @@
     height: 24px;
     cursor: pointer;
   }
-  .mc-picked .choosed .c_btn button:active {
+  .mc-picked .choosed-container .choosed .c_btn button:active {
     -webkit-transform: translateY(5px);
             transform: translateY(5px);
     -webkit-transition: all 0.2s;

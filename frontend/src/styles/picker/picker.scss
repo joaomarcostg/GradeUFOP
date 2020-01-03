@@ -119,58 +119,71 @@ $ufop_grey: #707a81;
   border-radius: 12px;
   box-shadow: -12px -12px 12px rgba($color: #fff, $alpha: 1), 12px 12px 12px rgba($color: #000, $alpha: 0.08);
 
-  .choosed {
-    padding: 10px 0px;
-    .c_col {
-      float: left;
+  .choosed-container {
+    p {
+      padding: 10px;
       font-family: "Montserrat", sans-serif;
-      font-weight: bold;
       text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      border-bottom: 1px solid black;
     }
 
-    // .c_depto {
-    //   padding: 4px;
-    //   width: 16%;
-    //   // background: green;
-    // }
-    .c_disc {
-      border-right: 1px solid black;
-      padding: 4px;
-      width: 64%;
-      // background: red;
-    }
-    .c_turma {
-      border-right: 1px solid black;
-      padding: 4px;
-      width: 30%;
-      // background: yellow;
-    }
-    .c_btn {
-      overflow: visible;
-      width: 6%;
-      height: inherit;
-      margin-top: 0px;
-      box-sizing: border-box;
-      // background: #eee;
+    .choosed {
+      padding: 10px 0px;
 
-      button {
-        // margin-top: 36px;
+      .c_col {
+        float: left;
+        font-family: "Montserrat", sans-serif;
+        font-weight: bold;
+        text-align: center;
+      }
+
+      // .c_depto {
+      //   padding: 4px;
+      //   width: 16%;
+      //   // background: green;
+      // }
+      .c_disc {
+        border-right: 1px solid black;
+        padding: 4px;
+        width: 64%;
+        // background: red;
+      }
+      .c_turma {
+        border-right: 1px solid black;
+        padding: 4px;
+        width: 30%;
+        // background: yellow;
+      }
+      .c_btn {
         overflow: visible;
-        height: 24px;
-        width: 24px;
-        background: #eee;
-        border: 0;
-        cursor: pointer;
+        width: 6%;
+        height: inherit;
+        margin-top: 0px;
+        box-sizing: border-box;
+        // background: #eee;
 
-        &:hover {
-          transform: translateY(-5px);
-          transition: all 0.2s;
-        }
+        button {
+          // margin-top: 36px;
+          overflow: visible;
+          height: 24px;
+          width: 24px;
+          background: #eee;
+          border: 0;
+          cursor: pointer;
 
-        &:active {
-          // box-shadow: 0px 2px 2px 0 rgba(0, 0, 0, 0.05);
-          transform: translateY(5px);
-          transition: all 0.2s;
+          &:hover {
+            transform: translateY(-5px);
+            transition: all 0.2s;
+          }
+
+          &:active {
+            // box-shadow: 0px 2px 2px 0 rgba(0, 0, 0, 0.05);
+            transform: translateY(5px);
+            transition: all 0.2s;
+          }
         }
       }
     }
@@ -186,15 +199,16 @@ $ufop_grey: #707a81;
       padding: 15px;
 
       .sel {
+        border-radius: 16px;
         margin-top: 10px;
-        padding: 4px 0px;
+        padding: 5px 10px;
         background-color: rgba($color: $ufop_red, $alpha: 0.9);
         width: 100%;
         // text-align-last: center;
         font-family: "Montserrat", sans-serif;
         font-size: 14px;
         color: white;
-        
+
         option {
           width: 100%;
         }
@@ -235,48 +249,50 @@ $ufop_grey: #707a81;
   }
 
   .mc-picked {
-    .choosed {
-      position: relative;
-      margin-top: 10px;
-      background: rgba($color: white, $alpha: 0.9);
-      color: black;
-      border: 1px solid $ufop_grey;
-      border-radius: 16px;
-
-      .c_col {
-        border-right: 0;
-        font-size: 16px;
+    .choosed-container {
+      .choosed {
         position: relative;
-        width: 100%;
-        text-align: center;
-        padding: 15px 15px;
-      }
+        margin-top: 10px;
+        background: rgba($color: white, $alpha: 0.9);
+        color: black;
+        border: 1px solid $ufop_grey;
+        border-radius: 16px;
 
-      .c_disc {
-        border-bottom: 1px solid $ufop_grey;
-      }
+        .c_col {
+          border: 0;
+          font-size: 16px;
+          position: relative;
+          width: 100%;
+          text-align: center;
+          padding: 15px 15px;
+        }
 
-      .c_btn {
-        text-align: right;
-        position: absolute;
-        top: -26px;
-        right: -26px;
-        overflow: visible;
+        .c_disc{
+          border-bottom: 1px solid $ufop_grey;
+        }
 
-        button {
-          background: white;
-          border-radius: 16px;
-          width: fit-content;
-          margin: 0;
-          height: 24px;
-          // border: 0;
-          // border-radius: 4px;
-          cursor: pointer;
+        .c_btn {
+          text-align: right;
+          position: absolute;
+          top: -24px;
+          right: -24px;
+          overflow: visible;
 
-          &:active {
-            // box-shadow: 0px 2px 2px 0 rgba(0, 0, 0, 0.05);
-            transform: translateY(5px);
-            transition: all 0.2s;
+          button {
+            background: white;
+            border-radius: 16px;
+            width: fit-content;
+            margin: 0;
+            height: 24px;
+            // border: 0;
+            // border-radius: 4px;
+            cursor: pointer;
+
+            &:active {
+              // box-shadow: 0px 2px 2px 0 rgba(0, 0, 0, 0.05);
+              transform: translateY(5px);
+              transition: all 0.2s;
+            }
           }
         }
       }
