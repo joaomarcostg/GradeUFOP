@@ -6,14 +6,15 @@ import Schedule from './components/schedule'
 
 import './App.css';
 
+
+
 function App() {
+
   return (
     <div className="main-container">
       <Header />
       <Picker />
-      <div className="content">
-        {/* <Schedule /> */}
-      </div>
+      <Schedule />
     </div>    
   );
 }

@@ -97,7 +97,7 @@ function Picker(props) {
 
 
         const response = (await api.get('/deptos')).data
-        console.log(response)
+        // console.log(response)
         const departamentos = []
         response.forEach(depto => {
             departamentos.push(depto.siglaDepto)
@@ -156,13 +156,13 @@ function Picker(props) {
         const tag_disc = document.getElementById('get_disc')
         const picked_disc = tag_disc.options[tag_disc.selectedIndex].text
         const codigo_disc = picked_disc.split(' ')[0]
-        console.log(codigo_disc)
+        // console.log(codigo_disc)
         const response = (await api.get(`/turmas`, {
             headers: {
                 disc: codigo_disc
             }
         })).data
-        console.log(response)
+        // console.log(response)
         const turmas = []
         response.forEach(turma => {
             turmas.push({ numero: turma.turmaDisc, professor: turma.professorDisc })
@@ -184,63 +184,90 @@ function Picker(props) {
         const tag_disc = document.getElementById('get_disc')
         const tag_turma = document.getElementById('get_turma')
 
-
         const depto = tag_depto.options[tag_depto.selectedIndex].text
-        
-        if(tag_disc.options.length > 0){
+        const ch_container = document.getElementById('chc')
+
+        if (tag_disc.options.length > 0) {
 
             const disc = tag_disc.options[tag_disc.selectedIndex].text
-            
-            if (disc != '') {
-                
-                const turma = tag_turma.options[tag_turma.selectedIndex].text
-                const ch_container = document.getElementById('chc')
-                
-                const c_disc = document.createElement('div')
-                c_disc.setAttribute('class', 'c_col c_disc')
-                c_disc.innerText = disc
-                const id = disc.split(' ')[0]
-                
-                const c_turma = document.createElement('div')
-                c_turma.setAttribute('class', 'c_col c_turma')
-                if (turma == '') {
-                    c_turma.innerText = 'Qualquer Turma'
-                }
-                else {
-                    c_turma.innerText = turma
-                }
-                
-                const c_btn = document.createElement('div')
-                c_btn.setAttribute('class', 'c_col c_btn')
-                
-                const button = document.createElement('button')
-                // button.setAttribute('id', id)
-                button.setAttribute('type', 'button')
-                button.onclick = () => removePicked(id)
+            const codigo = disc.split(' ')[0]
 
-                const img = document.createElement('img')
-                img.setAttribute('src', rmv_icon)
-                img.setAttribute('alt', 'Rmv')
-                
-                button.appendChild(img)
-                c_btn.appendChild(button)
-                
-                const choosed = document.createElement('div')
-                choosed.setAttribute('class', 'choosed')
-                choosed.setAttribute('id', id)
-                
-                choosed.appendChild(c_disc)
-                choosed.appendChild(c_turma)
-                choosed.appendChild(c_btn)
-                console.log(choosed)
-                ch_container.appendChild(choosed)
+            if (document.getElementById(codigo) == null) {
+
+
+                if (disc != '') {
+
+                    setPickedCount(picked_count+1)
+                    console.log(picked_count)
+                    fillMin()
+                    const turma = tag_turma.options[tag_turma.selectedIndex].text
+
+                    const c_disc = document.createElement('div')
+                    c_disc.setAttribute('class', 'c_col c_disc')
+                    c_disc.innerText = disc
+                    const id = disc.split(' ')[0]
+
+                    const c_turma = document.createElement('div')
+                    c_turma.setAttribute('class', 'c_col c_turma')
+                    if (turma == '') {
+                        c_turma.innerText = 'Qualquer Turma'
+                    }
+                    else {
+                        c_turma.innerText = turma
+                    }
+
+                    const c_btn = document.createElement('div')
+                    c_btn.setAttribute('class', 'c_col c_btn')
+
+                    const button = document.createElement('button')
+                    // button.setAttribute('id', id)
+                    button.setAttribute('type', 'button')
+                    button.onclick = () => removePicked(id)
+
+                    const img = document.createElement('img')
+                    img.setAttribute('src', rmv_icon)
+                    img.setAttribute('alt', 'Rmv')
+
+                    button.appendChild(img)
+                    c_btn.appendChild(button)
+
+                    const choosed = document.createElement('div')
+                    choosed.setAttribute('class', 'choosed')
+                    choosed.setAttribute('id', id)
+
+                    choosed.appendChild(c_disc)
+                    choosed.appendChild(c_turma)
+                    choosed.appendChild(c_btn)
+                    // console.log(choosed)
+                    ch_container.appendChild(choosed)
+                }
+            }
+            else {
+                window.alert('Disciplina já escolhida!')
             }
         }
+        else {
+            window.alert('Selecione uma disciplina!')
+        }
     }
-        
+
     async function removePicked(id) {
         const choosed = document.getElementById(id)
         choosed.remove()
+        setPickedCount(picked_count - 1)
+        console.log(picked_count)
+        fillMin()
+    }
+
+    async function fillMin(){
+        const sel_min = document.getElementById('sel_min')
+        sel_min.innerText = null
+        
+        for(let i=1; i<=picked_count+1; i++){
+            const opt = document.createElement('option')
+            opt.text = i
+            sel_min.add(opt)
+        }
     }
 
     window.onload = function () {
@@ -248,9 +275,7 @@ function Picker(props) {
     }
 
 
-    // const [picked_count, setPickedCount] = useState(0);
-
-    // setPickedCOunt()
+    const [picked_count, setPickedCount] = useState(0);
 
     return (
         <div className="picker">
@@ -284,6 +309,17 @@ function Picker(props) {
             <div className="mc-picked">
                 <div className="choosed-container" id="chc">
                     <p>Disciplinas Escolhidas</p>
+                </div>
+            </div>
+            <div className="mc-resolve">
+                <div className="min-sel">
+                    <p>Quantidade mínima de disciplinas por grade:</p>
+                    <select name="min" id="sel_min">
+                        <option value="blank"></option>
+                    </select>
+                </div>
+                <div className="res-btn">
+                    <button type="button">Gerar Grades</button>
                 </div>
             </div>
         </div>

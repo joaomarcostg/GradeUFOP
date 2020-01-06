@@ -28,6 +28,8 @@ $ufop_grey: #707a81;
   }
 
   .sel {
+    border-radius: 6px;
+    outline: none;
     margin-top: 10px;
     padding: 4px;
     font-family: "Montserrat", sans-serif;
@@ -93,13 +95,13 @@ $ufop_grey: #707a81;
       cursor: pointer;
 
       &:hover {
-        transform: translateY(-5px);
+        transform: translateY(-2px);
         transition: all 0.2s;
       }
 
       &:active {
         // box-shadow: 0px 2px 2px 0 rgba(0, 0, 0, 0.05);
-        transform: translateY(5px);
+        transform: translateY(2px);
         transition: all 0.2s;
       }
     }
@@ -190,6 +192,92 @@ $ufop_grey: #707a81;
   }
 }
 
+.mc-resolve {
+  margin: 30px 30px;
+  padding: 20px 20px 20px 20px;
+  background-color: #eee;
+  border-radius: 12px;
+  box-shadow: -12px -12px 12px rgba($color: #fff, $alpha: 1), 12px 12px 12px rgba($color: #000, $alpha: 0.08);
+  *::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  .min-sel {
+    display: flex ;
+    margin-bottom: 30px;
+    justify-content: center;
+    // border-bottom: 1px solid black;
+    
+    p {
+      padding: 4px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16px;
+      font-weight: bold;
+      width: fit-content;
+      margin-right: 12px;
+      // background: green;
+    }
+
+    #sel_min {
+      // border-radius: 6px;
+      outline: none;
+      // margin-top: 10px;
+      // padding: 4px;
+      font-family: "Montserrat", sans-serif;
+      font-weight: bold;
+      background: rgba($color: #EEE, $alpha: 0.9);
+      border-top: none;
+      border-right: none;
+      border-left: none;
+      text-align-last: center;
+      width: 5%;
+      color: black;
+      font-size: 16px;
+      // outline: none;
+      cursor: pointer;
+
+      // &:hover {
+      //   background: $ufop_red;
+      // }
+    }
+  }
+
+  .res-btn {
+    text-align: center;
+
+    button {
+      cursor: pointer;
+      background: $ufop_red;
+      color: white;
+      border-radius: 16px;
+      border-color: #eee;
+      border-style: solid;
+      border-width: 2px;
+      outline: none;
+      //   box-shadow: 0px 4px 4px black;
+      box-shadow: -8px -8px 8px rgba($color: #fff, $alpha: 1), 8px 8px 8px rgba($color: #000, $alpha: 0.1);
+      padding: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      font-family: "Montserrat", sans-serif;
+
+      &:hover {
+        background: white;
+        color: $ufop_red;
+        border-color: $ufop_red;
+      }
+
+      &:active {
+        box-shadow: none;
+        transform: translateY(4px);
+        transition: ease-out 0.2s;
+      }
+    }
+  }
+}
+
 @media screen and (max-width: 900px) {
   .mc-picker {
     .col {
@@ -267,7 +355,7 @@ $ufop_grey: #707a81;
           padding: 15px 15px;
         }
 
-        .c_disc{
+        .c_disc {
           border-bottom: 1px solid $ufop_grey;
         }
 
@@ -290,7 +378,7 @@ $ufop_grey: #707a81;
 
             &:active {
               // box-shadow: 0px 2px 2px 0 rgba(0, 0, 0, 0.05);
-              transform: translateY(5px);
+              transform: translateY(2px);
               transition: all 0.2s;
             }
           }
