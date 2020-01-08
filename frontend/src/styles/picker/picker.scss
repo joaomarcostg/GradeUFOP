@@ -93,6 +93,7 @@ $ufop_grey: #707a81;
       background: #eee;
       border: 0;
       cursor: pointer;
+      outline: none;
 
       &:hover {
         transform: translateY(-2px);
@@ -175,6 +176,7 @@ $ufop_grey: #707a81;
           background: #eee;
           border: 0;
           cursor: pointer;
+          outline: none;
 
           &:hover {
             transform: translateY(-5px);

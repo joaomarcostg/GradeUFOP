@@ -7,8 +7,12 @@ import rmv_icon from '../assets/rmv_btn.svg'
 
 import api from '../services/api.js'
 
+// import Schedule from './components/schedule'
+
+
 function Picker(props) {
 
+    var qtd = 0;
     function changeText(selector, options, length) {
         const elements = document.querySelectorAll(selector);
         // console.log(elements)
@@ -197,8 +201,8 @@ function Picker(props) {
 
                 if (disc != '') {
 
-                    setPickedCount(picked_count+1)
-                    console.log(picked_count)
+                    qtd++;
+                    console.log(qtd)
                     fillMin()
                     const turma = tag_turma.options[tag_turma.selectedIndex].text
 
@@ -254,8 +258,8 @@ function Picker(props) {
     async function removePicked(id) {
         const choosed = document.getElementById(id)
         choosed.remove()
-        setPickedCount(picked_count - 1)
-        console.log(picked_count)
+        qtd--
+        console.log(qtd)
         fillMin()
     }
 
@@ -263,7 +267,7 @@ function Picker(props) {
         const sel_min = document.getElementById('sel_min')
         sel_min.innerText = null
         
-        for(let i=1; i<=picked_count+1; i++){
+        for(let i=1; i<=qtd; i++){
             const opt = document.createElement('option')
             opt.text = i
             sel_min.add(opt)
@@ -275,7 +279,7 @@ function Picker(props) {
     }
 
 
-    const [picked_count, setPickedCount] = useState(0);
+    // const [picked_count, setPickedCount] = useState(0);
 
     return (
         <div className="picker">

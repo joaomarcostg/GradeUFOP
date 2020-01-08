@@ -88,6 +88,7 @@
   background: #eee;
   border: 0;
   cursor: pointer;
+  outline: none;
 }
 
 .mc-picker .btn button:hover {
@@ -168,6 +169,7 @@
   background: #eee;
   border: 0;
   cursor: pointer;
+  outline: none;
 }
 
 .mc-picked .choosed-container .choosed .c_btn button:hover {

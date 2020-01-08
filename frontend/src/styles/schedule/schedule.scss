@@ -10,3 +10,124 @@ $ufop_grey: #707a81;
   box-sizing: border-box;
 }
 
+.mc-schedule {
+  //   background: white;
+  
+  text-align: center;
+  margin: 30px 30px;
+  padding: 20px 20px 20px 20px;
+  background-color: #eee;
+  border-radius: 12px;
+    display: flex;
+  box-shadow: -12px -12px 12px rgba($color: #fff, $alpha: 1), 12px 12px 12px rgba($color: #000, $alpha: 0.08);
+  *::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  .left{
+      width: 36px;
+      height: 36px;
+      margin-top: 80px;
+      margin-right: 20px;
+
+      button {
+
+          background: #EEE;
+          border: 0;
+          cursor: pointer;
+          outline: none;
+
+          &:hover {
+            transform: translateY(-2px);
+            transition: all 0.2s;
+          }
+    
+          &:active {
+            // box-shadow: 0px 2px 2px 0 rgba(0, 0, 0, 0.05);
+            transform: translateY(2px);
+            transition: all 0.2s;
+          }
+      }
+  }
+  
+  .right{
+      width: 36px;
+      height: 36px;
+      margin-top: 80px;
+      margin-left: 20px;
+
+      button {
+
+          background: #EEE;
+          border: 0;
+          cursor: pointer;
+          outline: none;
+
+          &:hover {
+            transform: translateY(-2px);
+            transition: all 0.2s;
+          }
+    
+          &:active {
+            // box-shadow: 0px 2px 2px 0 rgba(0, 0, 0, 0.05);
+            transform: translateY(2px);
+            transition: all 0.2s;
+          }
+      }
+  }
+
+  .tabela {
+    // border-collapse: collapse;
+    border: 1px solid $ufop_grey;
+    border-spacing: 0;
+    // border-radius: 8px;
+    width: 100%;
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+
+    
+    tr,
+    td,
+    thead {
+      padding: 4px;
+    }
+
+    thead {
+      background-color: $ufop_red;
+      color: white;
+      overflow: hidden;
+      font-size: 20px;
+
+      td {
+        border-right: 1px solid white;
+        &:last-of-type {
+          border: none;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        border-bottom: 1px solid $ufop_grey;
+        border-right: 1px solid $ufop_grey;
+
+        td {
+          border-bottom: 1px solid $ufop_grey;
+          border-right: 1px solid $ufop_grey;
+            
+          &:last-of-type{
+              border-right: none;
+          }
+        }
+      }
+
+      .ultimo {
+        td {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+}
