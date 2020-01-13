@@ -13,84 +13,6 @@ import api from '../services/api.js'
 function Picker(props) {
 
     var qtd = 0;
-    function changeText(selector, options, length) {
-        const elements = document.querySelectorAll(selector);
-        // console.log(elements)
-        const tail = '...';
-        if (elements && elements.length) {
-            let i = 0;
-            for (const element of elements) {
-                let text = options[i]
-                if (text.length < length) {
-                    element.innerText = text;
-
-                }
-                else {
-                    element.innerText = `${text.substring(0, length - tail.length).trim()}${tail}`;
-                }
-                i++;
-            }
-        }
-    }
-
-    function shortString(selector, width, options) {
-        // console.log('a')
-        if (width < 500) {
-            changeText(selector, options, 35)
-        }
-        else if (width < 600) {
-            changeText(selector, options, 40)
-        }
-        else if (width < 750) {
-            changeText(selector, options, 45)
-        }
-        else if (width < 900) {
-            changeText(selector, options, 50)
-        }
-        else if (width >= 900 && width < 1000) {
-            changeText(selector, options, 40)
-        }
-        else if (width >= 1000) {
-            changeText(selector, options, 50)
-        }
-    }
-
-    {
-        // window.onload = () => {
-        //     setInterval(() => {
-        //         var x = document.getElementById('get_depto')
-        //         let value = x.options[x.selectedIndex].text
-        //         console.log(value)
-        //     }, 1000)
-        // }
-
-        // window.onload = function () {
-
-        //     const options = []
-        //     const elements = document.querySelectorAll('.short');
-        //     if (elements && elements.length) {
-        //         for (const element of elements) {
-        //             let text = element.innerText;
-        //             // let id = element.value;
-        //             options.push(text)
-        //         }
-        //     }
-        //     const wd = this.window.innerWidth
-        //     const hd = this.window.innerHeight
-        //     if (hd < 900 && wd < 450) {
-        //         shortString('.short', wd, options)
-        //     }
-        //     else {
-
-
-        //         setInterval(() => {
-        //             var width = this.window.innerWidth
-        //             shortString('.short', width, options)
-        //             // console.log(width)
-        //         }, 100);
-        //     }
-        // };
-    }
 
     async function loadDeptos() {
         //CLEAR DROPDOWN
@@ -184,94 +106,116 @@ function Picker(props) {
 
     async function addPicked() {
 
-        const tag_depto = document.getElementById('get_depto')
-        const tag_disc = document.getElementById('get_disc')
-        const tag_turma = document.getElementById('get_turma')
+        if (qtd < 8) {
 
-        const depto = tag_depto.options[tag_depto.selectedIndex].text
-        const ch_container = document.getElementById('chc')
+            const tag_depto = document.getElementById('get_depto')
+            const tag_disc = document.getElementById('get_disc')
+            const tag_turma = document.getElementById('get_turma')
 
-        if (tag_disc.options.length > 0) {
+            const depto = tag_depto.options[tag_depto.selectedIndex].text
+            const ch_container = document.getElementById('chc')
 
-            const disc = tag_disc.options[tag_disc.selectedIndex].text
-            const codigo = disc.split(' ')[0]
+            if (tag_disc.options.length > 0) {
 
-            if (document.getElementById(codigo) == null) {
+                const disc = tag_disc.options[tag_disc.selectedIndex].text
+                const codigo = disc.split(' ')[0]
+
+                if (document.getElementById(codigo) == null) {
+
+                    if (disc != '') {
+
+                        qtd++;
+                        console.log(qtd)
+                        fillMin()
+                        const turma = tag_turma.options[tag_turma.selectedIndex].text
+
+                        const c_disc = document.createElement('div')
+                        c_disc.setAttribute('class', 'c_col c_disc')
+                        c_disc.innerText = disc
+                        const id = disc.split(' ')[0]
+
+                        const c_turma = document.createElement('div')
+                        c_turma.setAttribute('class', 'c_col c_turma')
+                        if (turma == '') {
+                            c_turma.innerText = 'Qualquer Turma'
+                            const escolhidas = props.pickeds
+                            escolhidas.push({ 'codigo': id, 'turma': '' })
+                            props.setpickeds(escolhidas)
+                        }
+                        else {
+                            c_turma.innerText = turma
+                            const escolhidas = props.pickeds
+                            escolhidas.push({ 'codigo': id, 'turma': turma.split(' ')[0].replace('T', '') })
+                            props.setpickeds(escolhidas)
+                        }
 
 
-                if (disc != '') {
 
-                    qtd++;
-                    console.log(qtd)
-                    fillMin()
-                    const turma = tag_turma.options[tag_turma.selectedIndex].text
+                        const c_btn = document.createElement('div')
+                        c_btn.setAttribute('class', 'c_col c_btn')
 
-                    const c_disc = document.createElement('div')
-                    c_disc.setAttribute('class', 'c_col c_disc')
-                    c_disc.innerText = disc
-                    const id = disc.split(' ')[0]
+                        const button = document.createElement('button')
+                        // button.setAttribute('id', id)
+                        button.setAttribute('type', 'button')
+                        button.onclick = () => removePicked(id)
 
-                    const c_turma = document.createElement('div')
-                    c_turma.setAttribute('class', 'c_col c_turma')
-                    if (turma == '') {
-                        c_turma.innerText = 'Qualquer Turma'
+                        const img = document.createElement('img')
+                        img.setAttribute('src', rmv_icon)
+                        img.setAttribute('alt', 'Rmv')
+
+                        button.appendChild(img)
+                        c_btn.appendChild(button)
+
+                        const choosed = document.createElement('div')
+                        choosed.setAttribute('class', 'choosed')
+                        choosed.setAttribute('id', id)
+
+                        choosed.appendChild(c_disc)
+                        choosed.appendChild(c_turma)
+                        choosed.appendChild(c_btn)
+                        // console.log(choosed)
+                        ch_container.appendChild(choosed)
                     }
-                    else {
-                        c_turma.innerText = turma
-                    }
-
-                    const c_btn = document.createElement('div')
-                    c_btn.setAttribute('class', 'c_col c_btn')
-
-                    const button = document.createElement('button')
-                    // button.setAttribute('id', id)
-                    button.setAttribute('type', 'button')
-                    button.onclick = () => removePicked(id)
-
-                    const img = document.createElement('img')
-                    img.setAttribute('src', rmv_icon)
-                    img.setAttribute('alt', 'Rmv')
-
-                    button.appendChild(img)
-                    c_btn.appendChild(button)
-
-                    const choosed = document.createElement('div')
-                    choosed.setAttribute('class', 'choosed')
-                    choosed.setAttribute('id', id)
-
-                    choosed.appendChild(c_disc)
-                    choosed.appendChild(c_turma)
-                    choosed.appendChild(c_btn)
-                    // console.log(choosed)
-                    ch_container.appendChild(choosed)
+                }
+                else {
+                    window.alert('Disciplina já escolhida!')
                 }
             }
             else {
-                window.alert('Disciplina já escolhida!')
+                window.alert('Selecione uma disciplina!')
             }
         }
         else {
-            window.alert('Selecione uma disciplina!')
+            window.alert('Limite de disciplinas atingido!')
         }
     }
 
     async function removePicked(id) {
         const choosed = document.getElementById(id)
+        const escolhidas = props.pickeds
+
+        escolhidas.splice(escolhidas.indexOf(id), 1)
+        props.setpickeds(escolhidas)
         choosed.remove()
         qtd--
+        console.log(props.pickeds)
         console.log(qtd)
         fillMin()
     }
 
-    async function fillMin(){
+    async function fillMin() {
         const sel_min = document.getElementById('sel_min')
         sel_min.innerText = null
-        
-        for(let i=1; i<=qtd; i++){
+
+        for (let i = 1; i <= qtd; i++) {
             const opt = document.createElement('option')
             opt.text = i
             sel_min.add(opt)
         }
+    }
+
+    async function Gerar() {
+        console.log(props.pickeds)
     }
 
     window.onload = function () {
@@ -323,7 +267,7 @@ function Picker(props) {
                     </select>
                 </div>
                 <div className="res-btn">
-                    <button type="button">Gerar Grades</button>
+                    <button type="button" onClick={Gerar}>Gerar Grades</button>
                 </div>
             </div>
         </div>
