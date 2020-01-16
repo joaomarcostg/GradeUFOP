@@ -314,67 +314,9 @@ function Picker(props) {
 
     async function Gerar() {
         const disciplinas = JSON.parse(JSON.stringify(props.pickeds))
-        const disciplinas2 = [
-            {
-                'codigo': 'CSI488',
-                'horas': 2,
-                'turmas': [{
-                    'numero': 31,
-                    'horario': [[0, 1], [2, 0]]
-                }, {
-                    'numero': 32,
-                    'horario': [[1, 0], [3, 0]]
-                }, {
-                    'numero': 33,
-                    'horario': [[0, 0], [3, 1]]
-                }]
-            },
-            {
-                'codigo': 'CSI745',
-                'horas': 2,
-                'turmas': [{
-                    'numero': 31,
-                    'horario': [[2, 3], [4, 4]]
-                }, {
-                    'numero': 32,
-                    'horario': [[1, 3], [3, 2]]
-                }, {
-                    'numero': 33,
-                    'horario': [[0, 1], [2, 1]]
-                }]
-            },
-            {
-                'codigo': 'CEA302',
-                'horas': 2,
-                'turmas': [{
-                    'numero': 31,
-                    'horario': [[0, 1], [3, 0]]
-                }, {
-                    'numero': 32,
-                    'horario': [[1, 2], [4, 3]]
-                }]
-            },
-            {
-                'codigo': 'CSI400',
-                'horas': 2,
-                'turmas': [{
-                    'numero': 31,
-                    'horario': [[1, 1], [4, 0]]
-                }]
-            },
-            {
-                'codigo': 'CEA502',
-                'horas': 2,
-                'turmas': [{
-                    'numero': 31,
-                    'horario': [[2, 2], [4, 1]]
-                }]
-            }
-        ]
 
         const combinacoes = [], cores_usadas = []
         let fluxo = 0
-        const grafo = algoritmo.carregar_grafo(disciplinas2)
         const possibilidades = []
         
         disciplinas.forEach(disc => {
@@ -382,9 +324,9 @@ function Picker(props) {
                 disc.turmas[i].horario = algoritmo.mudarFormato_Horario(turma.horario)
             })
         })
-        console.log(disciplinas, disciplinas2)
+        const grafo = algoritmo.carregar_grafo(disciplinas)
 
-        algoritmo.resolver(grafo, 4, 1, disciplinas2.length + 1, combinacoes, cores_usadas, fluxo, possibilidades)
+        algoritmo.resolver(grafo, 4, 1, disciplinas.length + 1, combinacoes, cores_usadas, fluxo, possibilidades)
         algoritmo.converter(possibilidades, grafo)
 
         console.log(possibilidades)

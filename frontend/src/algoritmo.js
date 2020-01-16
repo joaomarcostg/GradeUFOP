@@ -173,7 +173,7 @@ const algoritmo = {
                 if ((ind1 === -1) && (ind2 === -1)) {
                     cores_usadas.push(grafo[linha][j][1][0])
                     cores_usadas.push(grafo[linha][j][1][1])
-                    resp.push([linha, j])
+                    resp.push([linha, j, [cor1, cor2]])
                 }
             }
             j++
@@ -194,7 +194,7 @@ const algoritmo = {
             const cores_usadas_c = JSON.parse(JSON.stringify(cores_usadas))
             const grafo_c = JSON.parse(JSON.stringify(grafo))
             let fluxo_c = JSON.parse(JSON.stringify(fluxo))
-
+            // console.table(grafo_c)
             //se o grafo[i][j] !== 0, há uma capacidade de correr um fluxo ali
             if (grafo_c[i][j] !== 0) {
 
@@ -257,10 +257,12 @@ const algoritmo = {
         combinacoes.forEach(comb => {
             for (let i = 0; i < comb.length; i++) {
                 const disc = comb[i]
+                // console.log(disc[2])
                 if (disc !== '') {
                     disc[0] = grafo[disc[0]][disc[0]]
                     disc[1] = grafo[disc[1]][disc[1]]
-                    comb[i] = disc.toString().replace(',', ' - ')
+                    // const cores = disc[2].toString()
+                    comb[i] = [`${disc[0]} - T${disc[1]}`, disc[2]]
                 }
             }
         })
@@ -269,74 +271,3 @@ const algoritmo = {
 }
 
 export default algoritmo;
-
-// const disciplinas = [
-//     {
-//         'codigo': 'CSI488',
-//         'horas': 2,
-//         'turmas': [{
-//             'numero': 31,
-//             'horario': [[0, 1], [2, 0]]
-//         }, {
-//             'numero': 32,
-//             'horario': [[1, 0], [3, 0]]
-//         }, {
-//             'numero': 33,
-//             'horario': [[0, 0], [3, 1]]
-//         }]
-//     },
-//     {
-//         'codigo': 'CSI745',
-//         'horas': 2,
-//         'turmas': [{
-//             'numero': 31,
-//             'horario': [[2, 3], [4, 4]]
-//         }, {
-//             'numero': 32,
-//             'horario': [[1, 3], [3, 2]]
-//         }, {
-//             'numero': 33,
-//             'horario': [[0, 1], [2, 1]]
-//         }]
-//     },
-//     {
-//         'codigo': 'CEA302',
-//         'horas': 2,
-//         'turmas': [{
-//             'numero': 31,
-//             'horario': [[0, 1], [3, 0]]
-//         }, {
-//             'numero': 32,
-//             'horario': [[1, 2], [4, 3]]
-//         }]
-//     },
-//     {
-//         'codigo': 'CSI400',
-//         'horas': 2,
-//         'turmas': [{
-//             'numero': 31,
-//             'horario': [[1, 1], [4, 0]]
-//         }]
-//     },
-//     {
-//         'codigo': 'CEA502',
-//         'horas': 2,
-//         'turmas': [{
-//             'numero': 31,
-//             'horario': [[2, 2], [4, 1]]
-//         }]
-//     }
-// ]
-
-
-// const combinacoes = [], cores_usadas = []
-// let fluxo = 0
-// const grafo = carregar_grafo(disciplinas)
-// const possibilidades = []
-
-// resolver(grafo, 4, 1, disciplinas.length + 1, combinacoes, cores_usadas, fluxo, possibilidades)
-// converter(possibilidades, grafo)
-
-// console.log(possibilidades)
-
-
