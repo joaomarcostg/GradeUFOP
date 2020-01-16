@@ -1,3 +1,52 @@
+function mudarHoras(hora) {
+
+    if (hora == '13:30-15:10') {
+        hora = 0
+    } else if (hora == '15:20-17:00') {
+        hora = 1
+
+    } else if (hora == '17:10-18:50') {
+        hora = 2
+
+    } else if (hora == '19:00-20:40') {
+        hora = 3
+
+    } else if (hora == '21:00-22:40') {
+        hora = 4
+    }
+    return hora
+}
+
+function mudarFormato_Horario(horario) {
+
+    horario = horario.split(/,/g)
+
+    for (let i = 0; i < horario.length; i++) {
+        horario[i] = horario[i].split(/ /g)
+    }
+
+    horario.forEach(dias => {
+        if (dias[0] == 'SEG') {
+            dias[0] = 0
+            dias[1] = mudarHoras(dias[1])
+        } else if (dias[0] == 'TER') {
+            dias[0] = 1
+            dias[1] = mudarHoras(dias[1])
+        } else if (dias[0] == 'QUA') {
+            dias[0] = 2
+            dias[1] = mudarHoras(dias[1])
+        } else if (dias[0] == 'QUI') {
+            dias[0] = 3
+            dias[1] = mudarHoras(dias[1])
+        } else if (dias[0] == 'SEX') {
+            dias[0] = 4
+            dias[1] = mudarHoras(dias[1])
+
+        }
+    })
+    return horario
+}
+
 function calcula_cor(horario) {
 
     if (horario.length == 2) {
@@ -35,6 +84,11 @@ function grafo_vazio(tamanho) {
 
 function carregar_grafo(disciplinas) {
 
+    disciplinas.forEach( disc => {
+        disc.turmas.forEach( turma => {
+            mudarFormato_Horario(turma.horario)
+        })
+    })
     let capacidade = 0
     let vertices_count = disciplinas.length + 2 //somo 2 devido aos vertices S e T
     const turmas_disc = [], codigos_disc = []

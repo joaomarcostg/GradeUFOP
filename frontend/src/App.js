@@ -18,7 +18,7 @@ function App() {
     <div className="main-container">
       <Header />
       <Picker setpickeds={setEscolhidas} pickeds={escolhidas}/>
-      <Schedule />
+      <Schedule pickeds={escolhidas}/>
     </div>    
   );
 }

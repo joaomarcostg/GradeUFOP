@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import '../styles/schedule/schedule.css'
 
@@ -6,10 +6,6 @@ import btn_right from '../assets/right_btn.svg'
 import btn_left from '../assets/left_btn.svg'
 
 function Schedule(props) {
-
-    async function resolver() {
-        console.log('KKKK')
-    }
 
     return (
         <div className="mc-schedule">
