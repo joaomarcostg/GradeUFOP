@@ -13,7 +13,7 @@ O Algoritmo então retorna todas as possíveis grades dadas as disciplinas escol
 
 ## Iniciar Aplicação
 Como o projeto ainda não foi hospedado, para utilizar a aplicação há dois scripts básicos.
-Primeiramente, depois de clonar o repositório, baixe as dependências com 'npm init' tanto no diretório 'backend' quanto no 'frontend'.
+Primeiramente, depois de clonar o repositório, baixe as dependências com 'npm i' tanto no diretório 'backend' quanto no 'frontend'.
 Depois execute:
 ```
 cd backend/src
