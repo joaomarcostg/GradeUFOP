@@ -366,5 +366,8 @@
     -webkit-transition: all 0.2s;
     transition: all 0.2s;
   }
+  .mc-resolve .min-sel #sel_min {
+    width: 20%;
+  }
 }
 /*# sourceMappingURL=picker.css.map */

@@ -171,14 +171,36 @@ const algoritmo = {
 
                 //se as cores estiverem disponiveis elas agora sao removidas
                 if ((ind1 === -1) && (ind2 === -1)) {
-                    cores_usadas.push(grafo[linha][j][1][0])
-                    cores_usadas.push(grafo[linha][j][1][1])
+                    cores_usadas.push(cor1)
+                    cores_usadas.push(cor2)
                     resp.push([linha, j, [cor1, cor2]])
                 }
             }
             j++
         }
         resp.push('')
+        return resp
+    },
+
+    //adiciono todas turmas da disciplina sem restricao
+    add_turmas(grafo, linha, cores_usadas) {
+
+        const resp = []
+        let j = linha + 1
+
+        while (j < grafo[linha].length - 1) {
+
+            if (j !== linha && grafo[linha][j] !== 0) {
+
+                grafo[linha][j][0] -= grafo[linha][j][0]
+                const cor1 = grafo[linha][j][1][0]
+                const cor2 = grafo[linha][j][1][1]
+                cores_usadas.push(cor1)
+                cores_usadas.push(cor2)
+                resp.push([linha, j, [cor1, cor2]])
+            }
+            j++
+        }
         return resp
     },
 
@@ -194,7 +216,7 @@ const algoritmo = {
             const cores_usadas_c = JSON.parse(JSON.stringify(cores_usadas))
             const grafo_c = JSON.parse(JSON.stringify(grafo))
             let fluxo_c = JSON.parse(JSON.stringify(fluxo))
-            // console.table(grafo_c)
+
             //se o grafo[i][j] !== 0, há uma capacidade de correr um fluxo ali
             if (grafo_c[i][j] !== 0) {
 
@@ -206,7 +228,15 @@ const algoritmo = {
                 grafo_c[i][j] -= grafo_c[i][j]
 
                 //dado a disciplina escolhida 'j' escolho as turmas disponiveis
-                const resp = algoritmo.escolher_turma(grafo_c, j, cores_usadas_c)
+                let resp
+                if (j === 1) {
+                    resp = algoritmo.add_turmas(grafo_c, 1, cores_usadas_c)
+
+                }
+                else {
+
+                    resp = algoritmo.escolher_turma(grafo_c, j, cores_usadas_c)
+                }
 
                 //para cada turma disponivel (incluindo null)
                 resp.forEach(e => {

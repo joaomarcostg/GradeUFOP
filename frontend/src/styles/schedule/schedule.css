@@ -13,9 +13,6 @@
   padding: 20px 20px 20px 20px;
   background-color: #eee;
   border-radius: 12px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-box-shadow: -12px -12px 12px white, 12px 12px 12px rgba(0, 0, 0, 0.08);
           box-shadow: -12px -12px 12px white, 12px 12px 12px rgba(0, 0, 0, 0.08);
 }
@@ -26,63 +23,78 @@
   clear: both;
 }
 
-.mc-schedule .left {
+.mc-schedule .container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.mc-schedule .container .left {
   width: 36px;
   height: 36px;
   margin-top: 80px;
   margin-right: 20px;
 }
 
-.mc-schedule .left button {
-  background: #EEE;
+.mc-schedule .container .left button {
+  background: #eee;
   border: 0;
   cursor: pointer;
   outline: none;
 }
 
-.mc-schedule .left button:hover {
+.mc-schedule .container .left button:hover {
   -webkit-transform: translateY(-2px);
           transform: translateY(-2px);
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
 }
 
-.mc-schedule .left button:active {
+.mc-schedule .container .left button:active {
   -webkit-transform: translateY(2px);
           transform: translateY(2px);
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
 }
 
-.mc-schedule .right {
+.mc-schedule .container .right {
   width: 36px;
   height: 36px;
   margin-top: 80px;
   margin-left: 20px;
 }
 
-.mc-schedule .right button {
-  background: #EEE;
+.mc-schedule .container .right button {
+  background: #eee;
   border: 0;
   cursor: pointer;
   outline: none;
 }
 
-.mc-schedule .right button:hover {
+.mc-schedule .container .right button:hover {
   -webkit-transform: translateY(-2px);
           transform: translateY(-2px);
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
 }
 
-.mc-schedule .right button:active {
+.mc-schedule .container .right button:active {
   -webkit-transform: translateY(2px);
           transform: translateY(2px);
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
 }
 
-.mc-schedule .tabela {
+.mc-schedule .container .tabela-container {
+  width: 100%;
+  height: 180px;
+  position: relative;
+}
+
+.mc-schedule .container .tabela-container .tabela {
+  position: absolute;
+  top: 0px;
+  left: 0px;
   border: 1px solid #707a81;
   border-spacing: 0;
   width: 100%;
@@ -90,42 +102,214 @@
   font-size: 16px;
 }
 
-.mc-schedule .tabela tr,
-.mc-schedule .tabela td,
-.mc-schedule .tabela thead {
+@-webkit-keyframes shake {
+  0% {
+    -webkit-transform: translate(1px, 1px) rotate(0deg);
+            transform: translate(1px, 1px) rotate(0deg);
+  }
+  10% {
+    -webkit-transform: translate(-1px, -2px) rotate(-1deg);
+            transform: translate(-1px, -2px) rotate(-1deg);
+  }
+  20% {
+    -webkit-transform: translate(-3px, 0px) rotate(1deg);
+            transform: translate(-3px, 0px) rotate(1deg);
+  }
+  30% {
+    -webkit-transform: translate(3px, 2px) rotate(0deg);
+            transform: translate(3px, 2px) rotate(0deg);
+  }
+  40% {
+    -webkit-transform: translate(1px, -1px) rotate(1deg);
+            transform: translate(1px, -1px) rotate(1deg);
+  }
+  50% {
+    -webkit-transform: translate(-1px, 2px) rotate(-1deg);
+            transform: translate(-1px, 2px) rotate(-1deg);
+  }
+  60% {
+    -webkit-transform: translate(-3px, 1px) rotate(0deg);
+            transform: translate(-3px, 1px) rotate(0deg);
+  }
+  70% {
+    -webkit-transform: translate(3px, 1px) rotate(-1deg);
+            transform: translate(3px, 1px) rotate(-1deg);
+  }
+  80% {
+    -webkit-transform: translate(-1px, -1px) rotate(1deg);
+            transform: translate(-1px, -1px) rotate(1deg);
+  }
+  90% {
+    -webkit-transform: translate(1px, 2px) rotate(0deg);
+            transform: translate(1px, 2px) rotate(0deg);
+  }
+  100% {
+    -webkit-transform: translate(1px, -2px) rotate(-1deg);
+            transform: translate(1px, -2px) rotate(-1deg);
+  }
+}
+
+@keyframes shake {
+  0% {
+    -webkit-transform: translate(1px, 1px) rotate(0deg);
+            transform: translate(1px, 1px) rotate(0deg);
+  }
+  10% {
+    -webkit-transform: translate(-1px, -2px) rotate(-1deg);
+            transform: translate(-1px, -2px) rotate(-1deg);
+  }
+  20% {
+    -webkit-transform: translate(-3px, 0px) rotate(1deg);
+            transform: translate(-3px, 0px) rotate(1deg);
+  }
+  30% {
+    -webkit-transform: translate(3px, 2px) rotate(0deg);
+            transform: translate(3px, 2px) rotate(0deg);
+  }
+  40% {
+    -webkit-transform: translate(1px, -1px) rotate(1deg);
+            transform: translate(1px, -1px) rotate(1deg);
+  }
+  50% {
+    -webkit-transform: translate(-1px, 2px) rotate(-1deg);
+            transform: translate(-1px, 2px) rotate(-1deg);
+  }
+  60% {
+    -webkit-transform: translate(-3px, 1px) rotate(0deg);
+            transform: translate(-3px, 1px) rotate(0deg);
+  }
+  70% {
+    -webkit-transform: translate(3px, 1px) rotate(-1deg);
+            transform: translate(3px, 1px) rotate(-1deg);
+  }
+  80% {
+    -webkit-transform: translate(-1px, -1px) rotate(1deg);
+            transform: translate(-1px, -1px) rotate(1deg);
+  }
+  90% {
+    -webkit-transform: translate(1px, 2px) rotate(0deg);
+            transform: translate(1px, 2px) rotate(0deg);
+  }
+  100% {
+    -webkit-transform: translate(1px, -2px) rotate(-1deg);
+            transform: translate(1px, -2px) rotate(-1deg);
+  }
+}
+
+.mc-schedule .container .tabela-container .tabela tr,
+.mc-schedule .container .tabela-container .tabela td,
+.mc-schedule .container .tabela-container .tabela thead {
   padding: 4px;
 }
 
-.mc-schedule .tabela thead {
+.mc-schedule .container .tabela-container .tabela thead {
   background-color: #962a38;
   color: white;
   overflow: hidden;
   font-size: 20px;
 }
 
-.mc-schedule .tabela thead td {
+.mc-schedule .container .tabela-container .tabela thead .tr_dias td {
   border-right: 1px solid white;
 }
 
-.mc-schedule .tabela thead td:last-of-type {
+.mc-schedule .container .tabela-container .tabela thead .tr_dias td:last-of-type {
   border: none;
 }
 
-.mc-schedule .tabela tbody tr {
+.mc-schedule .container .tabela-container .tabela tbody .dia .td_horarios {
   border-bottom: 1px solid #707a81;
   border-right: 1px solid #707a81;
 }
 
-.mc-schedule .tabela tbody tr td {
+.mc-schedule .container .tabela-container .tabela tbody .dia .valores {
+  display: none;
+}
+
+.mc-schedule .container .tabela-container .tabela tbody .dia td {
   border-bottom: 1px solid #707a81;
   border-right: 1px solid #707a81;
 }
 
-.mc-schedule .tabela tbody tr td:last-of-type {
+.mc-schedule .container .tabela-container .tabela tbody .dia td:last-of-type {
   border-right: none;
 }
 
-.mc-schedule .tabela tbody .ultimo td {
+.mc-schedule .container .tabela-container .tabela tbody .ultimo .td_horarios {
   border-bottom: none;
+}
+
+.mc-schedule .container .tabela-container .tabela tbody .ultimo td {
+  border-bottom: none;
+}
+
+@media screen and (max-width: 900px) {
+  .mc-schedule .container {
+    display: block;
+    position: relative;
+  }
+  .mc-schedule .container .left {
+    position: absolute;
+    top: 100px;
+    left: 15%;
+  }
+  .mc-schedule .container .right {
+    position: absolute;
+    top: 100px;
+    right: 15%;
+  }
+  .mc-schedule .container .tabela-container {
+    height: 220px;
+    position: relative;
+  }
+  .mc-schedule .container .tabela-container .tabela * {
+    border: none;
+    display: block;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .mc-schedule .container .tabela-container .tabela thead {
+    padding: 0px;
+  }
+  .mc-schedule .container .tabela-container .tabela thead .tr_dias {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    font-size: 8px;
+    margin: 0 auto;
+    padding: 0px 0px;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .mc-schedule .container .tabela-container .tabela thead .tr_dias td {
+    width: 16%;
+  }
+  .mc-schedule .container .tabela-container .tabela thead #blank {
+    width: 20%;
+  }
+  .mc-schedule .container .tabela-container .tabela tbody {
+    display: block;
+  }
+  .mc-schedule .container .tabela-container .tabela tbody .dia {
+    padding: 0px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .mc-schedule .container .tabela-container .tabela tbody .dia .td_horarios {
+    padding: 4px 0px;
+    font-size: 8px;
+    width: 20%;
+  }
+  .mc-schedule .container .tabela-container .tabela tbody .dia .td_values {
+    padding: 0px;
+    font-size: 8px;
+    width: 16%;
+    padding: 4px 0px;
+  }
 }
 /*# sourceMappingURL=schedule.css.map */

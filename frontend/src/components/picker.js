@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 
 import '../styles/picker/picker.css'
@@ -7,12 +7,10 @@ import rmv_icon from '../assets/rmv_btn.svg'
 import algoritmo from '../algoritmo.js'
 import api from '../services/api.js'
 
-// import Schedule from './components/schedule'
-
-
 function Picker(props) {
 
-    var qtd = 0;
+    const professores = []
+    const [pickeds, setPickeds] = useState([])
 
     //carrego os departamentos do banco de dados para a dropdown-list
     async function loadDeptos() {
@@ -130,7 +128,7 @@ function Picker(props) {
     async function addPicked() {
 
         //verifico se a qtd já escolhida não ultrapassa o limite
-        if (qtd < 8) {
+        if (pickeds.length < 8) {
 
             //busco as select's tags relacionadas a disciplina e turma
             const tag_disc = document.getElementById('get_disc')
@@ -154,10 +152,6 @@ function Picker(props) {
                     //se o codigo for null, significa que essa disciplina ainda não foi escolhida
                     if (document.getElementById(codigo) === null) {
 
-                        //aumento a qtd das disciplinas escolhidas
-                        qtd++;
-                        //preencho o campo 'Minimo de disciplinas por grade'
-                        fillMin()
                         //guardo o texto da select tag 'turma'
                         const turma = tag_turma.options[tag_turma.selectedIndex].text
 
@@ -181,14 +175,13 @@ function Picker(props) {
                             c_turma.innerText = 'Qualquer Turma'
 
                             //adiciono essa disciplina às escolhidas deixando o atributo turma vazio
-                            const escolhidas = props.pickeds
+                            const escolhidas = pickeds
                             const response = (await api.get('/pickeds', {
                                 headers: {
                                     codigo: id,
                                     turma: ''
                                 }
                             })).data
-                            // console.log(response)
 
                             const turmas = []
                             response.forEach(turma => {
@@ -196,14 +189,20 @@ function Picker(props) {
                                     'numero': parseInt(turma.turmaDisc),
                                     'horario': turma.horarioDisc
                                 })
+                                professores.push({
+                                    'turma': `${turma.codigoDisc} - T${turma.turmaDisc}`,
+                                    'professor': turma.professorDisc
+                                })
                             })
                             escolhidas.push({
                                 'codigo': id,
                                 'horas': response[0].horarioDisc.split(',').length,
                                 'turmas': turmas
                             })
-                            console.log(escolhidas)
-                            props.setpickeds(escolhidas)
+                            setPickeds(escolhidas)
+
+                            //preencho o campo 'Minimo de disciplinas por grade'
+                            fillMin(pickeds.length)
                         }
                         //caso alguma turma for escolhida
                         else {
@@ -211,15 +210,18 @@ function Picker(props) {
                             c_turma.innerText = turma
 
                             //adiciono a disciplina com a turma escolhida em questão às escolhidas
-                            const escolhidas = props.pickeds
+                            const escolhidas = pickeds
                             const response = (await api.get('/pickeds', {
                                 headers: {
                                     codigo: id,
                                     turma: turma.split(' ')[0].replace('T', '')
                                 }
                             })).data
-                            // console.log(response)
 
+                            professores.push({
+                                'turma': `${response[0].codigoDisc} - T${response[0].turmaDisc}`,
+                                'professor': response[0].professorDisc
+                            })
 
                             escolhidas.push({
                                 'codigo': id,
@@ -230,8 +232,10 @@ function Picker(props) {
                                         'horario': response[0].horarioDisc
                                     }]
                             })
-                            console.log(escolhidas)
-                            props.setpickeds(escolhidas)
+                            setPickeds(escolhidas)
+                            
+                            //preencho o campo 'Minimo de disciplinas por grade'
+                            fillMin(pickeds.length)
                         }
 
 
@@ -282,10 +286,10 @@ function Picker(props) {
         }
     }
 
-
-    async function removePicked(id) {
+    //remover Disciplina Escolhida
+    function removePicked(id) {
         const choosed = document.getElementById(id)
-        const escolhidas = props.pickeds
+        const escolhidas = pickeds
 
         escolhidas.forEach((disc, i) => {
             if (id === disc.codigo) {
@@ -293,15 +297,13 @@ function Picker(props) {
             }
         })
 
-        props.setpickeds(escolhidas)
+        setPickeds(escolhidas)
         choosed.remove()
-        qtd--
-        // console.log(props.pickeds)
-        // console.log(qtd)
-        fillMin()
+        fillMin(pickeds.length)
     }
 
-    async function fillMin() {
+    //preencher a selectbox com a qtd min disponivel
+    function fillMin(qtd) {
         const sel_min = document.getElementById('sel_min')
         sel_min.innerText = null
 
@@ -312,32 +314,70 @@ function Picker(props) {
         }
     }
 
-    async function Gerar() {
-        const disciplinas = JSON.parse(JSON.stringify(props.pickeds))
+    //gerar a solucao
+    function Gerar() {
+        if (pickeds.length !== 0) {
 
-        const combinacoes = [], cores_usadas = []
-        let fluxo = 0
-        const possibilidades = []
-        
-        disciplinas.forEach(disc => {
-            disc.turmas.forEach((turma, i) => {
-                disc.turmas[i].horario = algoritmo.mudarFormato_Horario(turma.horario)
+            const disciplinas = JSON.parse(JSON.stringify(pickeds))
+            const combinacoes = [], cores_usadas = []
+            let fluxo = 0
+            const possibilidades = []
+
+
+            const sel_min = document.getElementById('sel_min')
+            const min = parseInt(sel_min.options[sel_min.selectedIndex].text)
+
+            disciplinas.forEach(disc => {
+                disc.turmas.forEach((turma, i) => {
+                    disc.turmas[i].horario = algoritmo.mudarFormato_Horario(turma.horario)
+                })
             })
-        })
-        const grafo = algoritmo.carregar_grafo(disciplinas)
 
-        algoritmo.resolver(grafo, 4, 1, disciplinas.length + 1, combinacoes, cores_usadas, fluxo, possibilidades)
-        algoritmo.converter(possibilidades, grafo)
+            const grafo = algoritmo.carregar_grafo(disciplinas)
+            algoritmo.resolver(grafo, min, 1, disciplinas.length + 1, combinacoes, cores_usadas, fluxo, possibilidades)
+            algoritmo.converter(possibilidades, grafo)
 
-        console.log(possibilidades)
+            ExibirSolucoes(possibilidades, professores)
+        }
+    }
+
+    //retorna um professor entre os possiveis
+    function getProfessor(professores, turma) {
+        for (let i = 0; i < professores.length; i++) {
+            if (professores[i].turma === turma) {
+                return professores[i].professor
+            }
+        }
+    }
+
+    //Manipula as solucoes e as envia para o componente Schedule
+    function ExibirSolucoes(possibilidades, professores) {
+
+        if (possibilidades.length > 0) {
+
+            const solucao = []
+            possibilidades.forEach(possibilidade => {
+                const grade = []
+                possibilidade.forEach(disc => {
+                    if (disc !== "") {
+                        const professor = getProfessor(professores, disc[0])
+                        grade.push({
+                            "disciplina": disc[0],
+                            "horario": disc[1],
+                            "professor": professor
+                        })
+                    }
+                })
+                solucao.push(grade)
+            })
+            props.setSolucao(solucao)
+            props.exibir(solucao, 0)
+        }
     }
 
     window.onload = function () {
         loadDeptos()
     }
-
-
-    // const [picked_count, setPickedCount] = useState(0);
 
     return (
         <div className="picker">
@@ -381,7 +421,7 @@ function Picker(props) {
                     </select>
                 </div>
                 <div className="res-btn">
-                    <button type="button" onClick={Gerar}>Gerar Grades</button>
+                    <button type="button" onClick={Gerar}> Gerar Grades</button>
                 </div>
             </div>
         </div>

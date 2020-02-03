@@ -39,11 +39,11 @@ module.exports = {
         try{
             const {codigo, turma} = req.headers 
             if(turma != ''){
-                const disciplinas = await knex.distinct('codigoDisc', 'horarioDisc', 'turmaDisc').from("Disciplina").where({codigoDisc: codigo, turmaDisc: turma})
+                const disciplinas = await knex.distinct('codigoDisc', 'horarioDisc', 'turmaDisc', 'professorDisc').from("Disciplina").where({codigoDisc: codigo, turmaDisc: turma})
                 return res.json(disciplinas)
             }
             else{
-                const disciplinas = await knex.distinct('codigoDisc', 'horarioDisc', 'turmaDisc').from("Disciplina").where({codigoDisc: codigo})
+                const disciplinas = await knex.distinct('codigoDisc', 'horarioDisc', 'turmaDisc', 'professorDisc').from("Disciplina").where({codigoDisc: codigo})
                 return res.json(disciplinas)
             }
         }

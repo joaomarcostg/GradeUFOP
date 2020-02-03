@@ -12,120 +12,243 @@ $ufop_grey: #707a81;
 
 .mc-schedule {
   //   background: white;
-  
+
   text-align: center;
   margin: 30px 30px;
   padding: 20px 20px 20px 20px;
   background-color: #eee;
   border-radius: 12px;
-    display: flex;
   box-shadow: -12px -12px 12px rgba($color: #fff, $alpha: 1), 12px 12px 12px rgba($color: #000, $alpha: 0.08);
   *::after {
     content: "";
     display: table;
     clear: both;
   }
+  .container {
+    display: flex;
 
-  .left{
+    .left {
       width: 36px;
       height: 36px;
       margin-top: 80px;
       margin-right: 20px;
 
       button {
+        background: #eee;
+        border: 0;
+        cursor: pointer;
+        outline: none;
 
-          background: #EEE;
-          border: 0;
-          cursor: pointer;
-          outline: none;
+        &:hover {
+          transform: translateY(-2px);
+          transition: all 0.2s;
+        }
 
-          &:hover {
-            transform: translateY(-2px);
-            transition: all 0.2s;
-          }
-    
-          &:active {
-            // box-shadow: 0px 2px 2px 0 rgba(0, 0, 0, 0.05);
-            transform: translateY(2px);
-            transition: all 0.2s;
-          }
+        &:active {
+          // box-shadow: 0px 2px 2px 0 rgba(0, 0, 0, 0.05);
+          transform: translateY(2px);
+          transition: all 0.2s;
+        }
       }
-  }
-  
-  .right{
+    }
+
+    .right {
       width: 36px;
       height: 36px;
       margin-top: 80px;
       margin-left: 20px;
 
       button {
+        background: #eee;
+        border: 0;
+        cursor: pointer;
+        outline: none;
 
-          background: #EEE;
-          border: 0;
-          cursor: pointer;
-          outline: none;
+        &:hover {
+          transform: translateY(-2px);
+          transition: all 0.2s;
+        }
 
-          &:hover {
-            transform: translateY(-2px);
-            transition: all 0.2s;
-          }
-    
-          &:active {
-            // box-shadow: 0px 2px 2px 0 rgba(0, 0, 0, 0.05);
-            transform: translateY(2px);
-            transition: all 0.2s;
-          }
+        &:active {
+          // box-shadow: 0px 2px 2px 0 rgba(0, 0, 0, 0.05);
+          transform: translateY(2px);
+          transition: all 0.2s;
+        }
       }
+    }
+    .tabela-container {
+      width: 100%;
+      height: 180px;
+      position: relative;
+
+      .tabela {
+        @keyframes shake {
+          0% {
+            transform: translate(1px, 1px) rotate(0deg);
+          }
+          10% {
+            transform: translate(-1px, -2px) rotate(-1deg);
+          }
+          20% {
+            transform: translate(-3px, 0px) rotate(1deg);
+          }
+          30% {
+            transform: translate(3px, 2px) rotate(0deg);
+          }
+          40% {
+            transform: translate(1px, -1px) rotate(1deg);
+          }
+          50% {
+            transform: translate(-1px, 2px) rotate(-1deg);
+          }
+          60% {
+            transform: translate(-3px, 1px) rotate(0deg);
+          }
+          70% {
+            transform: translate(3px, 1px) rotate(-1deg);
+          }
+          80% {
+            transform: translate(-1px, -1px) rotate(1deg);
+          }
+          90% {
+            transform: translate(1px, 2px) rotate(0deg);
+          }
+          100% {
+            transform: translate(1px, -2px) rotate(-1deg);
+          }
+        }
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        border: 1px solid $ufop_grey;
+        border-spacing: 0;
+        // border-radius: 8px;
+        width: 100%;
+        font-family: "Montserrat", sans-serif;
+        font-size: 16px;
+
+        tr,
+        td,
+        thead {
+          padding: 4px;
+        }
+
+        thead {
+          background-color: $ufop_red;
+          color: white;
+          overflow: hidden;
+          font-size: 20px;
+          .tr_dias {
+            td {
+              border-right: 1px solid white;
+              &:last-of-type {
+                border: none;
+              }
+            }
+          }
+        }
+
+        tbody {
+          .dia {
+            .td_horarios {
+              border-bottom: 1px solid $ufop_grey;
+              border-right: 1px solid $ufop_grey;
+            }
+            // display: flex;
+            .valores {
+              display: none;
+            }
+            td {
+              border-bottom: 1px solid $ufop_grey;
+              border-right: 1px solid $ufop_grey;
+
+              &:last-of-type {
+                border-right: none;
+              }
+            }
+          }
+          .ultimo {
+            .td_horarios {
+              border-bottom: none;
+            }
+
+            td {
+              border-bottom: none;
+            }
+          }
+        }
+      }
+    }
   }
+}
 
-  .tabela {
-    // border-collapse: collapse;
-    border: 1px solid $ufop_grey;
-    border-spacing: 0;
-    // border-radius: 8px;
-    width: 100%;
-    font-family: "Montserrat", sans-serif;
-    font-size: 16px;
+@media screen and (max-width: 900px) {
+  .mc-schedule {
+    .container {
+      display: block;
+      position: relative;
 
-    
-    tr,
-    td,
-    thead {
-      padding: 4px;
-    }
-
-    thead {
-      background-color: $ufop_red;
-      color: white;
-      overflow: hidden;
-      font-size: 20px;
-
-      td {
-        border-right: 1px solid white;
-        &:last-of-type {
-          border: none;
-        }
+      .left {
+        position: absolute;
+        top: 100px;
+        left: 15%;
       }
-    }
+      .right {
+        position: absolute;
+        top: 100px;
+        right: 15%;
+      }
 
-    tbody {
-      tr {
-        border-bottom: 1px solid $ufop_grey;
-        border-right: 1px solid $ufop_grey;
-
-        td {
-          border-bottom: 1px solid $ufop_grey;
-          border-right: 1px solid $ufop_grey;
-            
-          &:last-of-type{
-              border-right: none;
+      .tabela-container {
+        height: 220px;
+        position: relative;
+        .tabela {
+          * {
+            border: none;
+            display: block;
+            box-sizing: border-box;
           }
-        }
-      }
 
-      .ultimo {
-        td {
-          border-bottom: none;
+          thead {
+            padding: 0px;
+
+            .tr_dias {
+              display: flex;
+              font-size: 8px;
+              margin: 0 auto;
+              padding: 0px 0px;
+              justify-content: center;
+
+              td {
+                width: 16%;
+              }
+            }
+            #blank {
+              width: 20%;
+            }
+          }
+
+          tbody {
+            display: block;
+
+            .dia {
+              padding: 0px;
+              display: flex;
+              justify-content: center;
+
+              .td_horarios {
+                padding: 4px 0px;
+                font-size: 8px;
+                width: 20%;
+              }
+              .td_values {
+                padding: 0px;
+                font-size: 8px;
+                width: 16%;
+                padding: 4px 0px;
+              }
+            }
+          }
         }
       }
     }
