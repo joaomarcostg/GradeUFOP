@@ -16,7 +16,7 @@ Como o projeto ainda não foi hospedado, para utilizar a aplicação há dois sc
 Primeiramente, depois de clonar o repositório, baixe as dependências com 'npm i' tanto no diretório 'backend' quanto no 'frontend'.
 Depois execute:
 ```
-cd backend/src
+cd backend
 yarn dev
 ```
 Então, abra outra janela do terminal na raiz do pasta onde o repositório foi baixado e execute:
