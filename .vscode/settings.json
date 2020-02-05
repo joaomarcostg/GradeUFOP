@@ -1,3 +1,8 @@
 {
-    "emmet.syntaxProfiles": { "javascript": "jsx" }
+    "emmet.syntaxProfiles": {
+        "javascript": "jsx"
+    },
+    "python.linting.pylintEnabled": false,
+    "python.linting.banditEnabled": true,
+    "python.linting.enabled": true
 }

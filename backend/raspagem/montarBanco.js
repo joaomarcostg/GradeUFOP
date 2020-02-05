@@ -1,14 +1,14 @@
 const fs = require('fs')
 const pg = require('pg')
 const jsontocsv = require('json2csv').parse
-const arq_disc = __dirname + '/testeDisciplinas.json'
-const arq_depto = __dirname + '/testeDepartamentos.json'
+const arq_disc = './disciplinas.json'
+const arq_depto = './departamentos.json'
 
 const pool = new pg.Pool({
     user: 'joaomarcostg',
     password: '12345678',
     host: 'localhost',
-    database: 'GradeUFOP',
+    database: 'GradeApp',
     password: '12345678',
     port: 5432
 })
@@ -28,21 +28,21 @@ function json2csv_Disciplina(json) {
     const csv = jsontocsv(json, {
         fields: ["nomeDisc", "codigoDisc", "turmaDisc", "horarioDisc", "professorDisc", "deptoDisc"]
     })
-    fs.writeFileSync(__dirname + '/tabelas/tabela_disciplina.csv', csv)
+    fs.writeFileSync('./tabela_disciplina.csv', csv)
 }
 
 function json2csv_Departamento(json) {
     const csv = jsontocsv(json, {
         fields: ["nomeDepto", "siglaDepto"]
     })
-    fs.writeFileSync(__dirname + 'tabelas/tabela_departamento.csv', csv)
+    fs.writeFileSync('./tabela_departamento.csv', csv)
 }
 
 function json2csv_Professor(json) {
     const csv = jsontocsv(json, {
         fields: ["nomeProf", "deptoProf"]
     })
-    fs.writeFileSync(__dirname + '/tabelas/tabela_professor.csv', csv)
+    fs.writeFileSync('./tabela_professor.csv', csv)
 }   
 
 //Gera um novo array que não contém elementos repetidos

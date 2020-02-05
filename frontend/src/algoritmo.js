@@ -7,7 +7,7 @@ const algoritmo = {
         } else if (hora === '15:20-17:00') {
             hora = 1
 
-        } else if (hora === '17:10-18:50') {
+        } else if (hora === '17:10-19:50') {
             hora = 2
 
         } else if (hora === '19:00-20:40') {

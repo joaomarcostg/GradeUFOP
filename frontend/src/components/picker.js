@@ -9,7 +9,7 @@ import api from '../services/api.js'
 
 function Picker(props) {
 
-    const professores = []
+    const [professores, setProfessores] = useState([])
     const [pickeds, setPickeds] = useState([])
 
     //carrego os departamentos do banco de dados para a dropdown-list
@@ -183,17 +183,21 @@ function Picker(props) {
                                 }
                             })).data
 
+                            
                             const turmas = []
+                            const profs = professores
                             response.forEach(turma => {
                                 turmas.push({
                                     'numero': parseInt(turma.turmaDisc),
                                     'horario': turma.horarioDisc
                                 })
-                                professores.push({
+                                profs.push({
                                     'turma': `${turma.codigoDisc} - T${turma.turmaDisc}`,
                                     'professor': turma.professorDisc
                                 })
                             })
+                            setProfessores(profs)
+
                             escolhidas.push({
                                 'codigo': id,
                                 'horas': response[0].horarioDisc.split(',').length,
@@ -218,10 +222,12 @@ function Picker(props) {
                                 }
                             })).data
 
-                            professores.push({
+                            const profs = professores
+                            profs.push({
                                 'turma': `${response[0].codigoDisc} - T${response[0].turmaDisc}`,
                                 'professor': response[0].professorDisc
                             })
+                            setProfessores(profs)
 
                             escolhidas.push({
                                 'codigo': id,
@@ -334,10 +340,15 @@ function Picker(props) {
             })
 
             const grafo = algoritmo.carregar_grafo(disciplinas)
+            console.log(grafo)
             algoritmo.resolver(grafo, min, 1, disciplinas.length + 1, combinacoes, cores_usadas, fluxo, possibilidades)
             algoritmo.converter(possibilidades, grafo)
-
-            ExibirSolucoes(possibilidades, professores)
+            if(possibilidades.length > 0){
+                ExibirSolucoes(possibilidades, professores)
+            }
+            else{
+                window.alert('Não há combinações possíveis!')
+            }
         }
     }
 

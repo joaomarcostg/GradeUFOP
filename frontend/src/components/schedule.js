@@ -131,6 +131,9 @@ function Schedule(props) {
                     </button>
                 </div>
             </div>
+            <h1>Legenda</h1>
+            <div className="legenda-container" id="legenda">
+            </div>
         </div>
     );
 }

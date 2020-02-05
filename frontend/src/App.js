@@ -21,10 +21,17 @@ function App() {
     }
 
     if (solucao !== '') {
+      const legenda = document.getElementById('legenda')
+      legenda.innerHTML = null
       solucao[pagina].forEach(disc => {
+        console.log(disc)
         if (disc.horario.length === 2) {
           const horario1 = document.getElementById(disc.horario[0])
           const horario2 = document.getElementById(disc.horario[1])
+          console.log(horario1, horario2)
+          const p = document.createElement('p')
+          p.innerText = `${disc.disciplina} - ${disc.professor}`
+          legenda.appendChild(p)
           horario1.innerText = disc.disciplina
           horario2.innerText = disc.disciplina
         }

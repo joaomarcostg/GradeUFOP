@@ -148,6 +148,10 @@
         "sigla": "DEMET"
     },
     {
+        "nome": "DEPARTAMENTO DE ALOCACAO DE MIF",
+        "sigla": "DEMIF"
+    },
+    {
         "nome": "DEPARTAMENTO DE ENGENHARIA DE MINAS",
         "sigla": "DEMIN"
     },
@@ -182,9 +186,5 @@
     {
         "nome": "DEPARTAMENTO DE TURISMO",
         "sigla": "DETUR"
-    },
-    {
-        "nome": "DEPARTAMENTO DE ENGENHARIA URBANA",
-        "sigla": "DEURB"
     }
 ]

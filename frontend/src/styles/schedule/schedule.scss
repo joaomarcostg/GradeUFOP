@@ -26,7 +26,7 @@ $ufop_grey: #707a81;
   }
   .container {
     display: flex;
-
+    margin-top: 20px;
     .left {
       width: 36px;
       height: 36px;
@@ -78,8 +78,7 @@ $ufop_grey: #707a81;
     }
     .tabela-container {
       width: 100%;
-      height: 180px;
-      position: relative;
+      height: fit-content;
 
       .tabela {
         @keyframes shake {
@@ -117,12 +116,9 @@ $ufop_grey: #707a81;
             transform: translate(1px, -2px) rotate(-1deg);
           }
         }
-        position: absolute;
-        top: 0px;
-        left: 0px;
+       
         border: 1px solid $ufop_grey;
         border-spacing: 0;
-        // border-radius: 8px;
         width: 100%;
         font-family: "Montserrat", sans-serif;
         font-size: 16px;
@@ -180,32 +176,62 @@ $ufop_grey: #707a81;
       }
     }
   }
+  h1 {
+    font-size: 20px;
+    padding: 8px;
+    margin-top: 30px;
+    font-family: "Montserrat", sans-serif;
+  }
+  .legenda-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 0px;
+    background: #fff;
+    border: 1px solid $ufop_grey;
+    border-radius: 8px;
+    text-align: center;
+    margin-top: 10px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+
+    p {
+      width: 100%;
+      padding: 16px;
+    }
+  }
 }
 
 @media screen and (max-width: 900px) {
   .mc-schedule {
+  
     .container {
-      display: block;
-      position: relative;
-
+      padding: 10px 0px;
+      border-bottom: 1px solid $ufop_grey;
+      display: grid;
+      margin: 0;
+      grid-template-areas:
+        "tabela tabela"
+        "left right";
+      
       .left {
-        position: absolute;
-        top: 100px;
-        left: 15%;
+        margin: 0 auto;
+        grid-area: left;
+        
       }
       .right {
-        position: absolute;
-        top: 100px;
-        right: 15%;
+        
+        margin: 0 auto;
+        grid-area: right;
       }
 
       .tabela-container {
-        height: 220px;
-        position: relative;
+        padding: 0px 0px 10px 0px;
+        grid-area: tabela;
+        
         .tabela {
           * {
-            border: none;
             display: block;
+            border: none;
             box-sizing: border-box;
           }
 
@@ -250,6 +276,22 @@ $ufop_grey: #707a81;
             }
           }
         }
+      }
+    }
+    h1{
+      padding: 10px;
+      margin: 10px 0px;
+      font-size: 14px;
+      font-family: "Montserrat", sans-serif;
+    }
+    .legenda-container {
+      display: block;
+      margin-top: 0px;
+      font-family: "Montserrat", sans-serif;
+      font-size: 12px;
+
+      p {
+        padding: 8px;
       }
     }
   }

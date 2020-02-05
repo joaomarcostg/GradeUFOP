@@ -5,7 +5,7 @@ module.exports = {
         connection: {
             host: '127.0.0.1',
             user: 'joaomarcostg',
-            password: '5h4z4mCARAI',
+            password: '12345678',
             database: 'GradeApp'
         }
     })

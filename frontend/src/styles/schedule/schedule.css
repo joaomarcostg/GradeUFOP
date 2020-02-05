@@ -27,6 +27,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  margin-top: 20px;
 }
 
 .mc-schedule .container .left {
@@ -87,14 +88,12 @@
 
 .mc-schedule .container .tabela-container {
   width: 100%;
-  height: 180px;
-  position: relative;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 .mc-schedule .container .tabela-container .tabela {
-  position: absolute;
-  top: 0px;
-  left: 0px;
   border: 1px solid #707a81;
   border-spacing: 0;
   width: 100%;
@@ -243,28 +242,64 @@
   border-bottom: none;
 }
 
+.mc-schedule h1 {
+  font-size: 20px;
+  padding: 8px;
+  margin-top: 30px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.mc-schedule .legenda-container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[2];
+      grid-template-columns: repeat(2, 1fr);
+  grid-gap: 0px;
+  background: #fff;
+  border: 1px solid #707a81;
+  border-radius: 8px;
+  text-align: center;
+  margin-top: 10px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+}
+
+.mc-schedule .legenda-container p {
+  width: 100%;
+  padding: 16px;
+}
+
 @media screen and (max-width: 900px) {
   .mc-schedule .container {
-    display: block;
-    position: relative;
+    padding: 10px 0px;
+    border-bottom: 1px solid #707a81;
+    display: -ms-grid;
+    display: grid;
+    margin: 0;
+        grid-template-areas: "tabela tabela" "left right";
   }
   .mc-schedule .container .left {
-    position: absolute;
-    top: 100px;
-    left: 15%;
+    margin: 0 auto;
+    -ms-grid-row: 2;
+    -ms-grid-column: 1;
+    grid-area: left;
   }
   .mc-schedule .container .right {
-    position: absolute;
-    top: 100px;
-    right: 15%;
+    margin: 0 auto;
+    -ms-grid-row: 2;
+    -ms-grid-column: 2;
+    grid-area: right;
   }
   .mc-schedule .container .tabela-container {
-    height: 220px;
-    position: relative;
+    padding: 0px 0px 10px 0px;
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 2;
+    grid-area: tabela;
   }
   .mc-schedule .container .tabela-container .tabela * {
-    border: none;
     display: block;
+    border: none;
     -webkit-box-sizing: border-box;
             box-sizing: border-box;
   }
@@ -310,6 +345,21 @@
     font-size: 8px;
     width: 16%;
     padding: 4px 0px;
+  }
+  .mc-schedule h1 {
+    padding: 10px;
+    margin: 10px 0px;
+    font-size: 14px;
+    font-family: "Montserrat", sans-serif;
+  }
+  .mc-schedule .legenda-container {
+    display: block;
+    margin-top: 0px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 12px;
+  }
+  .mc-schedule .legenda-container p {
+    padding: 8px;
   }
 }
 /*# sourceMappingURL=schedule.css.map */
