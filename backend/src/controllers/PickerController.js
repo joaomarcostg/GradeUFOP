@@ -5,7 +5,6 @@ module.exports = {
     async deptos (req, res) {
         try{
             const departamentos = await knex.select('*').from('Departamento')
-            // console.log(departamentos)
             return res.json(departamentos)
         }
         catch(err){
@@ -16,9 +15,7 @@ module.exports = {
     async discs (req, res) {
         try{
             const {depto} = req.headers 
-            // const disciplinas = await knex.select('*').from('Disciplina').where({deptoDisc: depto})
             const disciplinas = await  knex.distinct('codigoDisc', 'nomeDisc').from("Disciplina").where({deptoDisc: depto}).orderBy("nomeDisc")
-            // console.log(disciplinas)
             return res.json(disciplinas)
         }
         catch(err){
